@@ -3,23 +3,26 @@
   "id": "modid",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Utilities Mod",
+  "description": "A mod that adds a number of useful utilities to the Options Menu",
   "authors": [
-    "Me!"
+    "BoogieMonster1O1"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://boogiemonster1o1.github.io",
+    "sources": "https://github.com/BoogieMonster1O1/useful-utilities"
   },
 
   "license": "CC0-1.0",
   "icon": "assets/modid/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "boogie.utilmod.UtilitiesMod"
+    ],
+    "client": [
+      "boogie.utilmod.UsefulUtilitiesClient"
     ]
   },
   "mixins": [
