@@ -21,6 +21,14 @@ dependencies {
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
+	modImplementation "io.github.cottonmc:LibGui:1.8.2+1.15.2"
+}
+
+repositories {
+	maven {
+		name = "CottonMC"
+		url = "http://server.bbkr.space:8081/artifactory/libs-release"
+	}
 }
 
 processResources {
