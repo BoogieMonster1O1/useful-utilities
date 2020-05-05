@@ -29,7 +29,7 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         WButton calc = new WButton(new TranslatableText("gui.utilities.calculator"));
         root.add(calc, 0, 3, 4, 1);
         WButton cps = new WButton(new TranslatableText("gui.utilities.cps"));
-        root.add(cps, 0, 3, 4, 1);
+        root.add(cps, 0, 5, 4, 1);
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.title"), 0x000000);
         label.setAlignment(Alignment.CENTER);

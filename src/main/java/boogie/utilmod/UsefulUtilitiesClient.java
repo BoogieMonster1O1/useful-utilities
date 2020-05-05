@@ -11,8 +11,7 @@ public class UsefulUtilitiesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         System.out.println("Starting Useful Utlities...");
-        FabricKeyBinding key = FabricKeyBinding.Builder.create(new Identifier("utilmod", "open"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "Utilities").build();
-        KeyBindingRegistry.INSTANCE.addCategory("Utilities");
+        FabricKeyBinding key = FabricKeyBinding.Builder.create(new Identifier("utilmod", "util_key"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.categories.misc").build();
         KeyBindingRegistry.INSTANCE.register(key);
     }
 }
