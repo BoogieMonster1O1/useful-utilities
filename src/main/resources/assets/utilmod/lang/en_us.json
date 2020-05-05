@@ -1,3 +1,6 @@
 {
-  "gui.utilities": "Utilities"
+  "gui.utilities": "Utilities",
+  "gui.utilities.calculator": "Calculator",
+  "gui.utilities.title": "Available Utilities",
+  "gui.utilities.cps": "Clicks Per Second"
 }
