@@ -18,7 +18,7 @@ public class GameMenuScreenMixin extends Screen {
 
     @Inject( method = "initWidgets", at = @At("RETURN"))
     public void lol(CallbackInfo ci){
-        this.addButton(new ButtonWidget(this.width / 2 - 102, this.height / 4 + 144 + -16, 48, 20, I18n.translate("gui.utilities"), (buttonWidgetx) -> {
+        this.addButton(new ButtonWidget(this.width / 2 - 102, this.height / 4 + 144 + -16, 98, 20, I18n.translate("gui.utilities"), (buttonWidgetx) -> {
         }));
     }
 }
