@@ -37,8 +37,9 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         root.add(cps, 7, 3, 6, 1);
 
         WButton portal = new WButton(new TranslatableText("gui.utilities.portal"));
-        portal.setEnabled(false);
+        portal.setEnabled(true);
         root.add(portal, 14, 3, 6, 1);
+        calc.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreens(new PortalCoordinatesScreen())));
 
         WButton random = new WButton(new TranslatableText("gui.utilities.random"));
         random.setEnabled(false);

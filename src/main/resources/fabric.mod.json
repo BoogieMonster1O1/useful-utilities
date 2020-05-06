@@ -29,10 +29,17 @@
     "modid.mixins.json"
   ],
 
+  "jars": [
+    {
+      "file": "libs/libgui.jar"
+    }
+  ],
+
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
-    "minecraft": "1.15.x"
+    "minecraft": "1.15.x",
+    "libgui": "*"
   },
   "suggests": {
     "flamingo": "*"

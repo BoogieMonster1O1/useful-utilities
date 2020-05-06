@@ -17,7 +17,7 @@ public class GameCrashersScreen extends LightweightGuiDescription {
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.crash"), 0x000000);
         label.setAlignment(Alignment.CENTER);
-        root.add(label, 1, 5, 7, 1);
+        root.add(label, 1, 1, 7, 1);
 
         WButton normal = new WButton(new TranslatableText("gui.utilities.crash.normal"));
         root.add(normal,1,3,7,1);
