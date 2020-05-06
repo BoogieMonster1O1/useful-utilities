@@ -27,6 +27,9 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         WSprite right_icon = new WSprite(new Identifier("minecraft:textures/block/crafting_table_side.png"));
         root.add(right_icon, 18, 0, 2, 2);
 
+
+
+
         WButton calc = new WButton(new TranslatableText("gui.utilities.calculator"));
         calc.setEnabled(true);
         root.add(calc, 0, 3, 6, 1);
@@ -39,7 +42,7 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         WButton portal = new WButton(new TranslatableText("gui.utilities.portal"));
         portal.setEnabled(true);
         root.add(portal, 14, 3, 6, 1);
-        calc.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreens(new PortalCoordinatesScreen())));
+        portal.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreens(new PortalCoordinatesScreen())));
 
         WButton random = new WButton(new TranslatableText("gui.utilities.random"));
         random.setEnabled(false);
@@ -57,6 +60,9 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         crash.setEnabled(true);
         crash.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreens(new GameCrashersScreen())));
         root.add(crash, 0, 7, 6, 1);
+
+
+
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.title"), 0x000000);
         label.setAlignment(Alignment.CENTER);

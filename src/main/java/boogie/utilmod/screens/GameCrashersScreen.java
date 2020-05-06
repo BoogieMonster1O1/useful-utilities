@@ -6,6 +6,7 @@ import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.data.Alignment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.TranslatableText;
 
 public class GameCrashersScreen extends LightweightGuiDescription {
@@ -24,7 +25,7 @@ public class GameCrashersScreen extends LightweightGuiDescription {
         normal.setOnClick(new Runnable() {
             @Override
             public void run() {
-                System.exit(0);
+                MinecraftClient.getInstance().scheduleStop();
             }
         });
 

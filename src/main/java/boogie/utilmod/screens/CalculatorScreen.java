@@ -1,5 +1,6 @@
 package boogie.utilmod.screens;
 
+import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;
@@ -13,7 +14,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 
 @Environment(EnvType.CLIENT)
-public class CalculatorScreen extends LightweightGuiDescription{
+public class CalculatorScreen extends LightweightGuiDescription {
 
     private String fieldtext = new String();
     private boolean operation;
