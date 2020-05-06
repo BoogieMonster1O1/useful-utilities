@@ -50,11 +50,12 @@ public class UtilitiesScreen extends LightweightGuiDescription {
 
         WButton alarm = new WButton(new TranslatableText("gui.utilities.alarm"));
         alarm.setEnabled(false);
-        root.add(alarm, 7, 5, 6, 1);
+        root.add(alarm, 14, 5, 6, 1);
 
         WButton crash = new WButton(new TranslatableText("gui.utilities.crash"));
-        crash.setEnabled(false);
-        root.add(crash, 7, 5, 6, 1);
+        crash.setEnabled(true);
+        crash.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreens(new GameCrashersScreen())));
+        root.add(crash, 0, 7, 6, 1);
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.title"), 0x000000);
         label.setAlignment(Alignment.CENTER);
