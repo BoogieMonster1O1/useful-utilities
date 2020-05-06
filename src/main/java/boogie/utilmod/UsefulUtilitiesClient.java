@@ -17,7 +17,7 @@ public class UsefulUtilitiesClient implements ClientModInitializer {
         System.out.println("Starting Useful Utlities...");
         FabricKeyBinding key = FabricKeyBinding.Builder.create(new Identifier("utilmod", "util_key"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.categories.misc").build();
         KeyBindingRegistry.INSTANCE.register(key);
-        ClientTickCallback.EVENT.register(e ->
+        ClientTickCallback.EVENT.register(event ->
         {
             if(key.isPressed()) MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
         });
