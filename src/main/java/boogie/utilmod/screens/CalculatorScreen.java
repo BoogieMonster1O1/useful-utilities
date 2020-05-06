@@ -25,7 +25,6 @@ public class CalculatorScreen extends LightweightGuiDescription {
     public CalculatorScreen(){
         operation = false;
 
-        UtilitiesScreen a = new UtilitiesScreen();
         WGridPanel root = new WGridPanel();
         setRootPanel(root);
         root.setSize(160, 200);

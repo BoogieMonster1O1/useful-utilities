@@ -36,8 +36,9 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         calc.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreens(new CalculatorScreen())));
 
         WButton cps = new WButton(new TranslatableText("gui.utilities.cps"));
-        cps.setEnabled(false);
+        cps.setEnabled(true);
         root.add(cps, 7, 3, 6, 1);
+        cps.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreens(new ClicksPerSecondScreen())));
 
         WButton portal = new WButton(new TranslatableText("gui.utilities.portal"));
         portal.setEnabled(true);
@@ -48,18 +49,14 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         random.setEnabled(false);
         root.add(random, 0, 5, 6, 1);
 
-        WButton numcalc = new WButton(new TranslatableText("gui.utilities.calc_num"));
+        WButton numcalc = new WButton(new TranslatableText("gui.utilities.alarm"));
         numcalc.setEnabled(false);
         root.add(numcalc, 7, 5, 6, 1);
-
-        WButton alarm = new WButton(new TranslatableText("gui.utilities.alarm"));
-        alarm.setEnabled(false);
-        root.add(alarm, 14, 5, 6, 1);
 
         WButton crash = new WButton(new TranslatableText("gui.utilities.crash"));
         crash.setEnabled(true);
         crash.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreens(new GameCrashersScreen())));
-        root.add(crash, 0, 7, 6, 1);
+        root.add(crash, 14, 5, 6, 1);
 
 
 
