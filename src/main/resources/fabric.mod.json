@@ -29,11 +29,6 @@
     "modid.mixins.json"
   ],
 
-  "jars": [
-    {
-      "file": "libs/libgui.jar"
-    }
-  ],
 
   "depends": {
     "fabricloader": ">=0.7.4",
