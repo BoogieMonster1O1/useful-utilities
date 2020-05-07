@@ -81,7 +81,7 @@ public class AlarmScreen extends LightweightGuiDescription {
     }
 
     public static class TimeOnlyScreen extends CottonClientScreen {
-        public TimeOnlyScreen(Text title, GuiDescription description) {
+        TimeOnlyScreen(Text title, GuiDescription description) {
             super(title,description);
         }
     }

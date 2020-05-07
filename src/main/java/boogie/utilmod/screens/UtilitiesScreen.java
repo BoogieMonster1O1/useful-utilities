@@ -47,8 +47,9 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         portal.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreens(new PortalCoordinatesScreen())));
 
         WButton random = new WButton(new TranslatableText("gui.utilities.random"));
-        random.setEnabled(false);
+        random.setEnabled(true);
         root.add(random, 0, 5, 6, 1);
+        random.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreens(new DiceOnD3mandScreen())));
 
         WButton alarm = new WButton(new TranslatableText("gui.utilities.alarm"));
         alarm.setEnabled(true);
@@ -63,9 +64,11 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         WButton worldseed = new WButton(new TranslatableText("gui.utilities.world"));
         worldseed.setEnabled(true);
         root.add(worldseed,0,7,6,1);
-        worldseed.setOnClick(()->{
-           MinecraftClient.getInstance().openScreen(new UtilityScreens(new WorldInfoScreen()));
-        });
+        worldseed.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreens(new WorldInfoScreen())));
+
+        WButton grules = new WButton(new TranslatableText("gui.utilities.gamerules"));
+        grules.setEnabled(true);
+        root.add(grules,7,7,6,1);
 
 
 
