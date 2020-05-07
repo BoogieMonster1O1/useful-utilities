@@ -61,8 +61,11 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         root.add(crash, 14, 5, 6, 1);
 
         WButton worldseed = new WButton(new TranslatableText("gui.utilities.world"));
-        worldseed.setEnabled(false);
+        worldseed.setEnabled(true);
         root.add(worldseed,0,7,6,1);
+        worldseed.setOnClick(()->{
+           MinecraftClient.getInstance().openScreen(new UtilityScreens(new WorldInfoScreen()));
+        });
 
 
 

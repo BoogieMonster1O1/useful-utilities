@@ -1,11 +1,14 @@
 package boogie.utilmod.screens;
 
+import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
+import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.Alignment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
@@ -42,10 +45,11 @@ public class AlarmScreen extends LightweightGuiDescription {
                 long timeS = round(Double.parseDouble(time.getText()));
                 timeS = timeS * 1000;
                 long finalTime = timeS;
+                MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        MinecraftClient.getInstance().openScreen(new UtilityScreens(new TimeUpScreen(finalTime)));
+                        MinecraftClient.getInstance().openScreen(new TimeOnlyScreen(new TranslatableText("gui.utilities.alarm"),new TimeUpScreen(finalTime)));
                         timer.cancel();
                     }
                 }, timeS);
@@ -73,6 +77,12 @@ public class AlarmScreen extends LightweightGuiDescription {
             panel.add(head,1,1,10,1);
 
             panel.validate(this);
+        }
+    }
+
+    public static class TimeOnlyScreen extends CottonClientScreen {
+        public TimeOnlyScreen(Text title, GuiDescription description) {
+            super(title,description);
         }
     }
 
