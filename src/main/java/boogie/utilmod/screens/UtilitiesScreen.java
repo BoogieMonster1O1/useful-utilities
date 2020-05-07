@@ -12,6 +12,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import org.lwjgl.openal.AL;
 
 @Environment(EnvType.CLIENT)
 public class UtilitiesScreen extends LightweightGuiDescription {
@@ -49,15 +50,19 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         random.setEnabled(false);
         root.add(random, 0, 5, 6, 1);
 
-        WButton numcalc = new WButton(new TranslatableText("gui.utilities.alarm"));
-        numcalc.setEnabled(false);
-        root.add(numcalc, 7, 5, 6, 1);
+        WButton alarm = new WButton(new TranslatableText("gui.utilities.alarm"));
+        alarm.setEnabled(true);
+        alarm.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreens(new AlarmScreen())));
+        root.add(alarm, 7, 5, 6, 1);
 
         WButton crash = new WButton(new TranslatableText("gui.utilities.crash"));
         crash.setEnabled(true);
         crash.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreens(new GameCrashersScreen())));
         root.add(crash, 14, 5, 6, 1);
 
+        WButton worldseed = new WButton(new TranslatableText("gui.utilities.world"));
+        worldseed.setEnabled(false);
+        root.add(worldseed,0,7,6,1);
 
 
 

@@ -8,7 +8,6 @@ import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WLabeledSlider;
 import io.github.cottonmc.cotton.gui.widget.data.Alignment;
 import io.github.cottonmc.cotton.gui.widget.data.Axis;
-import net.minecraft.MinecraftVersion;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
