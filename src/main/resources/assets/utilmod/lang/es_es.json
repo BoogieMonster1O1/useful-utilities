@@ -14,7 +14,7 @@
   "gui.utilities.crash.normal": "Salir normalmente",
   "gui.utilities.crash.stackoverflow": "StackOverflowError",
   "gui.utilities.crash.outofmemory": "OutOfMemoryError",
-  "gui.utilities.crash.securit  y": "SecurityException",
+  "gui.utilities.crash.security": "SecurityException",
   "gui.utilities.crash.nullpointer": "NullPointerException",
   "gui.utilities.crash.internal": "InternalException",
   "gui.utilities.portal.overworld": "Consigue coordenadas de Overworld",
