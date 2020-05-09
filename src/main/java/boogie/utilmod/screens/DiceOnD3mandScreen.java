@@ -67,10 +67,10 @@ public class DiceOnD3mandScreen extends LightweightGuiDescription {
    static class DiceRollScreen extends CottonClientScreen {
         DiceRollScreen(Text title, GuiDescription description) {
             super(title, description);
-         }
+        }
         @Override
         public void onClose(){
-            MinecraftClient.getInstance().openScreen(new UtilityScreens(new DiceOnD3mandScreen()));
+            MinecraftClient.getInstance().openScreen(new UtilityScreens(new DiceOnD3mandScreen() ));
         }
         static class DiceHasRolledScreen extends LightweightGuiDescription{
             DiceHasRolledScreen(long val){
