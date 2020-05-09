@@ -29,3 +29,4 @@ bin/
 run/
 
 .DS_Store
+*.app
