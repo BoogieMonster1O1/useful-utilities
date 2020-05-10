@@ -12,6 +12,8 @@ import net.fabricmc.api.Environment;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
+import java.io.IOException;
+
 import static net.minecraft.client.MinecraftClient.getInstance;
 
 @Environment(EnvType.CLIENT)
@@ -63,7 +65,6 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         worldseed.setEnabled(true);
         root.add(worldseed,0,7,6,1);
         worldseed.setOnClick(()-> getInstance().openScreen(new UtilityScreens(new WorldInfoScreen())));
-
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.title"), 0x000000);
         label.setAlignment(Alignment.CENTER);

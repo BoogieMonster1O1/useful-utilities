@@ -10,7 +10,8 @@
   ],
   "contact": {
     "homepage": "https://github.com/BoogieMonster1O1/useful-utilities",
-    "sources": "https://github.com/BoogieMonster1O1/useful-utilities"
+    "sources": "https://github.com/BoogieMonster1O1/useful-utilities",
+    "issues": "https://github.com/boogieMonster1O1/useful-utilities/issues"
   },
 
   "license": "CC0-1.0",
