@@ -3,7 +3,7 @@
   "id": "utilmod",
   "version": "${version}",
 
-  "name": "Utilities Mod",
+  "name": "Useful Utilities",
   "description": "A mod that adds a number of useful utilities to the Options Menu",
   "authors": [
     "BoogieMonster1O1"
@@ -41,8 +41,5 @@
     "fabric": "*",
     "minecraft": "1.15.x",
     "libgui": "*"
-  },
-  "suggests": {
-    "flamingo": "*"
   }
 }
