@@ -61,10 +61,12 @@
   "gui.utilities.expense.deposit": "Make a Deposit",
   "gui.utilities.expense.bal": "Current Balance: ",
   "gui.utilities.expense.open": "Open Expense Log File",
-  "gui.utilities.expense.reset": "Reset Expense Log (Irreversible)",
+  "gui.utilities.expense.reset": "Reset Expense Log",
   "gui.utilities.expense.deleteplaceholder": "Type RESET",
   "gui.utilities.expense.deleteokay": "Reset Expense Log",
   "gui.utilities.expense.deleteconfirm": "Confirm Reset?",
   "gui.utilities.expense.reason": "Reason",
-  "gui.utilities.expense.amount": "Amount"
+  "gui.utilities.expense.amount": "Amount",
+  "gui.utilities.expense.makedeposit": "Make the Deposit",
+  "gui.utilities.expense.makewithdrawal": "Make the Withdrawal"
 }

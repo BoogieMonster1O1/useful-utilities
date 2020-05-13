@@ -6,7 +6,6 @@ import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.Alignment;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -14,6 +13,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Util;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -21,6 +21,7 @@ import java.util.function.BiConsumer;
 
 import static java.io.File.separator;
 import static net.minecraft.client.MinecraftClient.getInstance;
+import static java.lang.Math.round;
 
 public class ExpenseScreen extends LightweightGuiDescription {
     private static final String runDirString = getInstance().runDirectory.toString();
@@ -37,13 +38,11 @@ public class ExpenseScreen extends LightweightGuiDescription {
     private static Double currentVal = 0.0;
 
     private ExpenseScreen() throws IOException {
-        
 
-        File init = new File(initValString);
-        if(init.exists())getInstance().openScreen(new UtilityScreens(new TranslatableText("gui.utilities.expense"),new ExpenseScreen(true)));
+        if(current.exists()) getInstance().openScreen(new UtilityScreens(new TranslatableText("gui.utilities.expense"),new ExpenseScreen(true)));
         else {
-            FileWriter fw = new FileWriter(init);
-            init.createNewFile();
+            FileWriter fw = new FileWriter(current);
+            current.createNewFile();
             WGridPanel root = new WGridPanel();
             setRootPanel(root);
             root.setSize(128, 128);
@@ -95,22 +94,24 @@ public class ExpenseScreen extends LightweightGuiDescription {
         };
 
         WListPanel<String, ExpenseList> expenseListWListPanel = new WListPanel<>(expenseData, ExpenseList::new,expenseBiConsumer);
+        expenseListWListPanel.setListItemHeight(25);
 
-        root.add(expenseListWListPanel,3,10,128,243);
+        root.add(expenseListWListPanel,3,20,188,203);
 
         WLabel balanceLabel = new WLabel(I18n.translate("gui.utilities.expense.bal") + currentVal);
         balanceLabel.setAlignment(Alignment.CENTER);
-        root.add(balanceLabel,145,25,230,10);
+        root.add(balanceLabel,205,25,170,10);
 
         WButton depositButton = new WButton(new TranslatableText("gui.utilities.expense.deposit"));
-        root.add(depositButton,145,65,230,10);
-
+        root.add(depositButton,205,65,170,10);
+        depositButton.setOnClick(()-> getInstance().openScreen(new ExpenseTypeScreen(new TranslatableText("gui.utilities.expense.deposit"),new ExpenseScreen(Type.DEPOSIT))));
 
         WButton withdrawButton = new WButton(new TranslatableText("gui.utilities.expense.withdraw"));
-        root.add(withdrawButton,145,105,230,10);
+        root.add(withdrawButton,205,105,170,10);
+        withdrawButton.setOnClick(()-> getInstance().openScreen(new ExpenseTypeScreen(new TranslatableText("gui.utilities.expense.withdraw"),new ExpenseScreen(Type.WITHDRAW))));
 
         WButton openLog = new WButton(new TranslatableText("gui.utilities.expense.open"));
-        root.add(openLog,145,145,230,10);
+        root.add(openLog,205,145,170,10);
         openLog.setOnClick(()->{
             try {
                 Util.getOperatingSystem().open(expenses);
@@ -120,23 +121,8 @@ public class ExpenseScreen extends LightweightGuiDescription {
         });
 
         WButton resetLog = new WButton(new TranslatableText("gui.utilities.expense.reset"));
-        root.add(resetLog,145,185,230,10);
+        root.add(resetLog,205,185,170,10);
         resetLog.setOnClick(()-> getInstance().openScreen(new UtilityScreens(new TranslatableText("gui.utilities.expense.deleteconfirm"),new ExpenseScreen("RESET"))));
-
-        root.validate(this);
-    }
-
-    ExpenseScreen(Type type){
-        WGridPanel root = new WGridPanel();
-        setRootPanel(root);
-        root.setSize(256,128);
-        WTextField valField = new WTextField(new TranslatableText("gui.utilities.expense.amount"));
-        WTextField reasonField = new WTextField(new TranslatableText("gui.utilities.expense.reason"));
-        WButton btnDone = new WButton();
-        if(type == Type.DEPOSIT){
-            btnDone.setLabel(new TranslatableText("gui.utilities.expense.makedeposit"));
-        }
-        else if(type == Type.WITHDRAW);
 
         root.validate(this);
     }
@@ -170,7 +156,7 @@ public class ExpenseScreen extends LightweightGuiDescription {
 
     private static class ExpenseTypeScreen extends CottonClientScreen{
 
-        public ExpenseTypeScreen(Text title, GuiDescription description) {
+        ExpenseTypeScreen(Text title, GuiDescription description) {
             super(title, description);
         }
 
@@ -184,12 +170,81 @@ public class ExpenseScreen extends LightweightGuiDescription {
         }
     }
 
+    private ExpenseScreen(Type type){
+
+        WPlainPanel root = new WPlainPanel();
+        setRootPanel(root);
+        root.setSize(256,128);
+        WTextField valField = new WTextField(new TranslatableText("gui.utilities.expense.amount"));
+        WTextField reasonField = new WTextField(new TranslatableText("gui.utilities.expense.reason"));
+        reasonField.setMaxLength(30);
+        WButton btnDone = new WButton();
+        if(type == Type.DEPOSIT){
+            btnDone.setLabel(new TranslatableText("gui.utilities.expense.makedeposit"));
+            btnDone.setOnClick(()->{
+                try {
+                    Double val = Double.parseDouble(valField.getText());
+                    FileWriter fw = new FileWriter(expenses,true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    String fwString = "+" + val + " " + reasonField.getText();
+                    bw.newLine();
+                    bw.write(fwString);
+                    bw.close();
+                    currentVal +=val;
+                    currentVal*=10000;
+                    currentVal = Double.parseDouble(Long.toString(round(currentVal)));
+                    currentVal/=10000;
+                    current.delete();
+                    current.createNewFile();
+                    FileWriter fw0 = new FileWriter(current);
+                    fw0.write(Double.toString(currentVal));
+                    fw0.close();
+                    getInstance().openScreen(new UtilityScreens(new ExpenseScreen(true)));
+                } catch (Exception exp) {
+                    exp.printStackTrace();
+                }
+            });
+        }
+        else if (type == Type.WITHDRAW){
+            btnDone.setLabel(new TranslatableText("gui.utilities.expense.makewithdrawal"));
+            btnDone.setOnClick(()->{
+                try {
+                    Double val = Double.parseDouble(valField.getText());
+                    BigDecimal a = new BigDecimal(val);
+                    FileWriter fw = new FileWriter(expenses,true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    String fwString = "-" + val + " " + reasonField.getText();
+                    bw.newLine();
+                    bw.write(fwString);
+                    bw.close();
+                    currentVal -=val;
+                    currentVal*=10000;
+                    currentVal = Double.parseDouble(Long.toString(round(currentVal)));
+                    currentVal/=10000;
+                    current.delete();
+                    current.createNewFile();
+                    FileWriter fw0 = new FileWriter(current);
+                    fw0.write(Double.toString(currentVal));
+                    fw0.close();
+                    getInstance().openScreen(new UtilityScreens(new ExpenseScreen(true)));
+                } catch (Exception exp) {
+                    exp.printStackTrace();
+                }
+            });
+        }
+        root.add(valField,10,30,80,1);
+        root.add(reasonField,100,30,146,1);
+        root.add(btnDone,9,70,238,1);
+
+        root.validate(this);
+    }
+
     private static class ExpenseList extends WPlainPanel{
         private WLabel expenseLabel;
 
         ExpenseList(){
             expenseLabel = new WLabel("");
-            this.add(expenseLabel, 1, 2, 100, 18);
+            this.add(expenseLabel, 1, 2, 100, 10);
         }
     }
 
