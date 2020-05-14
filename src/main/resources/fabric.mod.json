@@ -3,14 +3,15 @@
   "id": "utilmod",
   "version": "${version}",
 
-  "name": "Utilities Mod",
+  "name": "Useful Utilities",
   "description": "A mod that adds a number of useful utilities to the Options Menu",
   "authors": [
     "BoogieMonster1O1"
   ],
   "contact": {
-    "homepage": "https://boogiemonster1o1.github.io",
-    "sources": "https://github.com/BoogieMonster1O1/useful-utilities"
+    "homepage": "https://github.com/BoogieMonster1O1/useful-utilities",
+    "sources": "https://github.com/BoogieMonster1O1/useful-utilities",
+    "issues": "https://github.com/boogieMonster1O1/useful-utilities/issues"
   },
 
   "license": "CC0-1.0",
@@ -40,8 +41,5 @@
     "fabric": "*",
     "minecraft": "1.15.x",
     "libgui": "*"
-  },
-  "suggests": {
-    "flamingo": "*"
   }
 }

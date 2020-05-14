@@ -9,10 +9,16 @@ import io.github.cottonmc.cotton.gui.widget.WSprite;
 import io.github.cottonmc.cotton.gui.widget.data.Alignment;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
+import java.io.File;
+import java.io.IOException;
+
+import static boogie.utilmod.screens.KeyboardScreen.KeyboardMainScreen;
 import static net.minecraft.client.MinecraftClient.getInstance;
+import static boogie.utilmod.screens.ExpenseScreen.ExpenseMainScreen;
 
 @Environment(EnvType.CLIENT)
 public class UtilitiesScreen extends LightweightGuiDescription {
@@ -64,6 +70,33 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         root.add(worldseed,0,7,6,1);
         worldseed.setOnClick(()-> getInstance().openScreen(new UtilityScreens(new WorldInfoScreen())));
 
+        WButton keyboard = new WButton(new TranslatableText("gui.utilities.keyboard"));
+        keyboard.setEnabled(true);
+        root.add(keyboard,7,7,6,1);
+        keyboard.setOnClick(()-> getInstance().openScreen(new KeyboardMainScreen()));
+
+        WButton expense = new WButton(new TranslatableText("gui.utilities.expense"));
+        expense.setEnabled(true);
+        root.add(expense,14,7,6,1);
+        expense.setOnClick(()->{
+            File initFIle = new File(getInstance().runDirectory.toString() + File.separator + "init.txt");
+            if(!initFIle.exists()){
+                expense.setOnClick(()-> {
+                    try {
+                        getInstance().openScreen(new ExpenseMainScreen());
+                    } catch (IOException exemption) {
+                        exemption.printStackTrace();
+                    }
+                });
+            }
+            else {
+                try {
+                    getInstance().openScreen(new UtilityScreens(new TranslatableText("gui.utilities.expense"),new ExpenseScreen(true)));
+                } catch (IOException expectation) {
+                    expectation.printStackTrace();
+                }
+            }
+        });
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.title"), 0x000000);
         label.setAlignment(Alignment.CENTER);
