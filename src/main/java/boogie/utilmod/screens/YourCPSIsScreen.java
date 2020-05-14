@@ -2,21 +2,21 @@ package boogie.utilmod.screens;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
+import io.github.cottonmc.cotton.gui.client.ClientCottonScreen;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 
-public class YourCPSIsScreen extends CottonClientScreen {
+public class YourCPSIsScreen extends ClientCottonScreen {
     public YourCPSIsScreen(GuiDescription description) {
         super(description);
     }
 
     @Override
     public void onClose(){
-        MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
+        MinecraftClient.getInstance().openScreen(new ClientCottonScreen(new UtilitiesScreen()));
     }
 
     public static class CPSOutputScreen extends LightweightGuiDescription {

@@ -1,7 +1,7 @@
 package boogie.utilmod.mixin;
 
 import boogie.utilmod.screens.UtilitiesScreen;
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
+import io.github.cottonmc.cotton.gui.client.ClientCottonScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -22,7 +22,7 @@ public class GameMenuScreenMixin extends Screen {
     @Inject(method = "initWidgets", at = @At("RETURN"))
     public void lol(CallbackInfo ci){
         this.addButton(new ButtonWidget(this.width / 2 - 102, this.height / 4 + 144 + -16, 98, 20, I18n.translate("gui.utilities"), (buttonWidgetx) -> {
-            MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
+            MinecraftClient.getInstance().openScreen(new ClientCottonScreen(new UtilitiesScreen()));
         }));
     }
 }

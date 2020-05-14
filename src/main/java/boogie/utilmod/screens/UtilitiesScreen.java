@@ -6,10 +6,8 @@ import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WSprite;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
@@ -99,7 +97,6 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         });
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.title"), 0x000000);
-        label.setAlignment(Alignment.CENTER);
         root.add(label, 7, 1, 6, 1);
 
         root.validate(this);

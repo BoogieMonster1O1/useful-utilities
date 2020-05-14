@@ -1,12 +1,11 @@
 package boogie.utilmod.screens;
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
+import io.github.cottonmc.cotton.gui.client.ClientCottonScreen;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import io.github.cottonmc.cotton.gui.widget.WWidget;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.sound.SoundEvents;
@@ -69,7 +68,7 @@ public class KeyboardScreen extends LightweightGuiDescription {
     }
 
 
-    public static class KeyboardMainScreen extends CottonClientScreen {
+    public static class KeyboardMainScreen extends ClientCottonScreen {
 
         public KeyboardMainScreen() {
             super(new TranslatableText("gui.utilities.keyboard"), new KeyboardScreen());
@@ -77,7 +76,7 @@ public class KeyboardScreen extends LightweightGuiDescription {
 
         @Override
         public void onClose() {
-            getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
+            getInstance().openScreen(new ClientCottonScreen(new UtilitiesScreen()));
         }
 
         @Override
@@ -147,7 +146,6 @@ public class KeyboardScreen extends LightweightGuiDescription {
         private Identifier TEXTURE;
         private Text label;
         private Text keyLabel;
-        private Alignment alignment = Alignment.CENTER;
         private float pitch;
         private KeyColor keyColor;
 
@@ -182,14 +180,14 @@ public class KeyboardScreen extends LightweightGuiDescription {
         @Environment(EnvType.CLIENT)
         @Override
         public void paintBackground(int x, int y, int mouseX, int mouseY) {
-            ScreenDrawing.texturedRect(x, y, width, height, TEXTURE, 0xFFFFFFFF);
+            ScreenDrawing.rect(TEXTURE,x, y, width, height, 0xFFFFFFFF);
             if(this.keyColor == KeyColor.WHITE) {
-                ScreenDrawing.drawString(this.label.asFormattedString(), this.alignment, x, y + 55, this.width, 0x000000);
-                ScreenDrawing.drawString(this.keyLabel.asFormattedString(), this.alignment, x, y + 70, this.width, 0xFF0000);
+                ScreenDrawing.drawString(this.label.asFormattedString(), x, y + 55, 0x000000);
+                ScreenDrawing.drawString(this.keyLabel.asFormattedString(), x, y + 70, 0xFF0000);
             }
             else if(this.keyColor == KeyColor.BLACK){
-                ScreenDrawing.drawString(this.label.asFormattedString(), this.alignment, x, y + 20, this.width, 0xFFFFFF);
-                ScreenDrawing.drawString(this.keyLabel.asFormattedString(), this.alignment, x, y + 35, this.width, 0xFF0000);
+                ScreenDrawing.drawString(this.label.asFormattedString(), x, y + 20, 0xFFFFFF);
+                ScreenDrawing.drawString(this.keyLabel.asFormattedString(), x, y + 35, 0xFF0000);
             }
         }
     }

@@ -7,7 +7,6 @@ import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WTextField;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.text.LiteralText;
@@ -259,7 +258,6 @@ public class CalculatorScreen extends LightweightGuiDescription {
             }
         });
 
-        label.setAlignment(Alignment.CENTER);
         root.add(label, 2, 1, 5, 1);
 
         root.validate(this);

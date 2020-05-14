@@ -5,7 +5,6 @@ import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.TranslatableText;
 
@@ -17,7 +16,6 @@ public class GameCrashersScreen extends LightweightGuiDescription {
         root.setSize(160,220);
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.crash"), 0x000000);
-        label.setAlignment(Alignment.CENTER);
         root.add(label, 1, 1, 7, 1);
 
         WButton normal = new WButton(new TranslatableText("gui.utilities.crash.normal"));

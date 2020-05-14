@@ -2,10 +2,9 @@ package boogie.utilmod.screens;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
+import io.github.cottonmc.cotton.gui.client.ClientCottonScreen;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -18,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 import static java.io.File.separator;
 import static net.minecraft.client.MinecraftClient.getInstance;
@@ -93,13 +93,12 @@ public class ExpenseScreen extends LightweightGuiDescription {
             destination.expenseLabel.setText(new LiteralText(strinj));
         };
 
-        WListPanel<String, ExpenseList> expenseListWListPanel = new WListPanel<>(expenseData, ExpenseList::new,expenseBiConsumer);
+        WListPanel<String, ExpenseList> expenseListWListPanel = new WListPanel<>(expenseData, null, ExpenseList::new, expenseBiConsumer);
         expenseListWListPanel.setListItemHeight(25);
 
         root.add(expenseListWListPanel,3,20,188,203);
 
         WLabel balanceLabel = new WLabel(I18n.translate("gui.utilities.expense.bal") + currentVal);
-        balanceLabel.setAlignment(Alignment.CENTER);
         root.add(balanceLabel,205,25,170,10);
 
         WButton depositButton = new WButton(new TranslatableText("gui.utilities.expense.deposit"));
@@ -136,7 +135,6 @@ public class ExpenseScreen extends LightweightGuiDescription {
         deleteField.setSuggestion(I18n.translate("gui.utilities.expense.deleteplaceholder"));
 
         WButton doneButton = new WButton(new TranslatableText("gui.utilities.expense.deleteokay"));
-        doneButton.setAlignment(Alignment.CENTER);
 
         root.add(deleteField,1,1,7,1);
         root.add(doneButton,1,3,7,1);
@@ -146,15 +144,15 @@ public class ExpenseScreen extends LightweightGuiDescription {
             if(del.equals(textDel)){
                 expenses.delete();
                 current.delete();
-                getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
+                getInstance().openScreen(new ClientCottonScreen(new UtilitiesScreen()));
             }
-            else getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
+            else getInstance().openScreen(new ClientCottonScreen(new UtilitiesScreen()));
         });
 
         root.validate(this);
     }
 
-    private static class ExpenseTypeScreen extends CottonClientScreen{
+    private static class ExpenseTypeScreen extends ClientCottonScreen{
 
         ExpenseTypeScreen(Text title, GuiDescription description) {
             super(title, description);
@@ -178,9 +176,9 @@ public class ExpenseScreen extends LightweightGuiDescription {
         WTextField valField = new WTextField(new TranslatableText("gui.utilities.expense.amount"));
         WTextField reasonField = new WTextField(new TranslatableText("gui.utilities.expense.reason"));
         reasonField.setMaxLength(30);
-        WButton btnDone = new WButton();
+        WButton btnDone = null;
         if(type == Type.DEPOSIT){
-            btnDone.setLabel(new TranslatableText("gui.utilities.expense.makedeposit"));
+            btnDone = new WButton(new TranslatableText("gui.utilities.expense.makedeposit"));
             btnDone.setOnClick(()->{
                 try {
                     Double val = Double.parseDouble(valField.getText());
@@ -206,7 +204,7 @@ public class ExpenseScreen extends LightweightGuiDescription {
             });
         }
         else if (type == Type.WITHDRAW){
-            btnDone.setLabel(new TranslatableText("gui.utilities.expense.makewithdrawal"));
+            btnDone = new WButton(new TranslatableText("gui.utilities.expense.makewithdrawal"));
             btnDone.setOnClick(()->{
                 try {
                     Double val = Double.parseDouble(valField.getText());
@@ -232,6 +230,8 @@ public class ExpenseScreen extends LightweightGuiDescription {
                 }
             });
         }
+        assert btnDone != null;
+
         root.add(valField,10,30,80,1);
         root.add(reasonField,100,30,146,1);
         root.add(btnDone,9,70,238,1);
@@ -248,14 +248,14 @@ public class ExpenseScreen extends LightweightGuiDescription {
         }
     }
 
-    static class ExpenseMainScreen extends CottonClientScreen{
+    static class ExpenseMainScreen extends ClientCottonScreen{
         ExpenseMainScreen() throws IOException {
             super(new TranslatableText("gui.utilities.expense"), new ExpenseScreen());
         }
 
         @Override
         public void onClose() {
-            getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
+            getInstance().openScreen(new ClientCottonScreen(new UtilitiesScreen()));
         }
     }
 

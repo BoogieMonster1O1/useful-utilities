@@ -2,10 +2,9 @@ package boogie.utilmod.screens;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
+import io.github.cottonmc.cotton.gui.client.ClientCottonScreen;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
@@ -29,9 +28,8 @@ public class AlarmScreen extends LightweightGuiDescription {
         WSprite clock = new WSprite(new Identifier("minecraft:textures/item/clock_00.png"));
         root.add(clock,1,1,2,2);
 
-        WLabel label = new WLabel(new TranslatableText("gui.utilities.alarm"));
+        WLabel label = new WLabel(I18n.translate("gui.utilities.alarm"));
         root.add(label,4,1,7,1);
-        label.setAlignment(Alignment.CENTER);
 
         WTextField time = new WTextField();
         time.setSuggestion(new TranslatableText("gui.utilities.alarm.time"));
@@ -45,7 +43,7 @@ public class AlarmScreen extends LightweightGuiDescription {
                 long timeS = round(Double.parseDouble(time.getText()));
                 timeS = timeS * 1000;
                 long finalTime = timeS;
-                MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
+                MinecraftClient.getInstance().openScreen(new ClientCottonScreen(new UtilitiesScreen()));
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -73,14 +71,13 @@ public class AlarmScreen extends LightweightGuiDescription {
             panel.setSize(256,64);
             setRootPanel(panel);
             WLabel head = new WLabel(I18n.translate("gui.utilities.alarm.alarm1") + seconds + " " + I18n.translate("gui.utilities.alarm.alarm2"));
-            head.setAlignment(Alignment.CENTER);
             panel.add(head,1,1,10,1);
 
             panel.validate(this);
         }
     }
 
-    public static class TimeOnlyScreen extends CottonClientScreen {
+    public static class TimeOnlyScreen extends ClientCottonScreen {
         TimeOnlyScreen(Text title, GuiDescription description) {
             super(title,description);
         }

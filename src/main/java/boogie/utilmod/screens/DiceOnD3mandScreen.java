@@ -2,13 +2,12 @@ package boogie.utilmod.screens;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
+import io.github.cottonmc.cotton.gui.client.ClientCottonScreen;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WTextField;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
@@ -28,9 +27,8 @@ public class DiceOnD3mandScreen extends LightweightGuiDescription {
        setRootPanel(root);
        root.setSize(256,196);
 
-       WLabel label = new WLabel(new TranslatableText("gui.utilities.random"));
+       WLabel label = new WLabel(I18n.translate("gui.utilities.random"));
        root.add(label,4,1,7,1);
-       label.setAlignment(Alignment.CENTER);
 
        WTextField range1 = new WTextField();
        root.add(range1,2,3,4,1);
@@ -64,7 +62,7 @@ public class DiceOnD3mandScreen extends LightweightGuiDescription {
    }
 
 
-   static class DiceRollScreen extends CottonClientScreen {
+   static class DiceRollScreen extends ClientCottonScreen {
         DiceRollScreen(Text title, GuiDescription description) {
             super(title, description);
         }

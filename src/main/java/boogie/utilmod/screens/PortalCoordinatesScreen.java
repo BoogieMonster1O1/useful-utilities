@@ -6,7 +6,7 @@ import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WTextField;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 
@@ -14,16 +14,14 @@ public class PortalCoordinatesScreen extends LightweightGuiDescription {
 
     public PortalCoordinatesScreen(){
 
-        WLabel titleput = new WLabel(new TranslatableText("gui.utilities.portal.output"));
-        titleput.setAlignment(Alignment.CENTER);
+        WLabel titleput = new WLabel(I18n.translate("gui.utilities.portal.output"));
 
         WGridPanel root = new WGridPanel();
         setRootPanel(root);
         root.setSize(256,196);
 
-        WLabel label = new WLabel(new TranslatableText("gui.utilities.portal"));
+        WLabel label = new WLabel(I18n.translate("gui.utilities.portal"));
         root.add(label,4,1,7,1);
-        label.setAlignment(Alignment.CENTER);
 
         WTextField inputx = new WTextField();
         root.add(inputx,2,3,4,1);

@@ -1,7 +1,7 @@
 package boogie.utilmod;
 
 import boogie.utilmod.screens.UtilitiesScreen;
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
+import io.github.cottonmc.cotton.gui.client.ClientCottonScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
 import net.fabricmc.fabric.api.client.keybinding.KeyBindingRegistry;
@@ -24,7 +24,7 @@ public class UsefulUtilitiesClient implements ClientModInitializer {
         KeyBindingRegistry.INSTANCE.register(key);
         ClientTickCallback.EVENT.register(event ->
         {
-            if(key.isPressed()) MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
+            if(key.isPressed()) MinecraftClient.getInstance().openScreen(new ClientCottonScreen(new UtilitiesScreen()));
         });
     }
 }

@@ -2,12 +2,7 @@ package boogie.utilmod.screens;
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
-import io.github.cottonmc.cotton.gui.widget.WButton;
-import io.github.cottonmc.cotton.gui.widget.WGridPanel;
-import io.github.cottonmc.cotton.gui.widget.WLabel;
-import io.github.cottonmc.cotton.gui.widget.WLabeledSlider;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
-import io.github.cottonmc.cotton.gui.widget.data.Axis;
+import io.github.cottonmc.cotton.gui.widget.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
@@ -31,11 +26,10 @@ public class ClicksPerSecondScreen extends LightweightGuiDescription {
         root.setSize(160,160);
         root.validate(this);
 
-        WLabel label = new WLabel(new TranslatableText("gui.utilities.cps"));
-        label.setAlignment(Alignment.CENTER);
+        WLabel label = new WLabel(I18n.translate("gui.utilities.cps"));
         root.add(label,1,1,7,1);
 
-        WLabeledSlider seconds = new WLabeledSlider(5,30,Axis.HORIZONTAL);
+        WLabeledSlider seconds = new WLabeledSlider(5,30);
         seconds.setLabel(new LiteralText(I18n.translate("gui.utilities.cps.time") + seconds.getValue()));
         seconds.setLabelUpdater(i -> new LiteralText(I18n.translate("gui.utilities.cps.time") + seconds.getValue()));
         root.add(seconds,1,5,7,1);
