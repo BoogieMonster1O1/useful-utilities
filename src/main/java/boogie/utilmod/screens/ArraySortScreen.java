@@ -43,7 +43,8 @@ public class ArraySortScreen extends LightweightGuiDescription {
 
         WButton bubSortButton = new WButton(new TranslatableText("gui.utilities.bubblesort"));
         root.add(bubSortButton,1,8,18,1);
-        bubSortButton.setEnabled(false);
+        bubSortButton.setEnabled(true);
+        bubSortButton.setOnClick(this::arrayBubbleSort);
 
         WButton clearButton = new WButton(new TranslatableText("gui.utilities.sort.clear"));
         root.add(clearButton,1,12,18,1);
@@ -72,7 +73,7 @@ public class ArraySortScreen extends LightweightGuiDescription {
             integerArray[i] = smallerNumber;
         }
         String arrayOutputString = Arrays.toString(integerArray);
-        arrayOutputString = arrayOutputString.replace(","," ");
+        arrayOutputString = arrayOutputString.replace(",","");
         arrayOutputString = arrayOutputString.replace("[","");
         arrayOutputString = arrayOutputString.replace("]","");
         arrayOutput.setText(arrayOutputString);
@@ -94,7 +95,31 @@ public class ArraySortScreen extends LightweightGuiDescription {
             integerArray[i+1] = key;
         }
         String arrayOutputString = Arrays.toString(integerArray);
-        arrayOutputString = arrayOutputString.replace(","," ");
+        arrayOutputString = arrayOutputString.replace(",","");
+        arrayOutputString = arrayOutputString.replace("[","");
+        arrayOutputString = arrayOutputString.replace("]","");
+        arrayOutput.setText(arrayOutputString);
+    }
+
+    private void arrayBubbleSort(){
+        String textFieldText = arrayInput.getText();
+        textFieldText = textFieldText.replace("  "," ");
+        String[] splitTextFieldText = textFieldText.split(" ");
+        int[] integerArray = convertToIntArray(splitTextFieldText);
+        int n = integerArray.length;
+        int temp = 0;
+        for(int i=0; i < n; i++){
+            for(int j=1; j < (n-i); j++){
+                if(integerArray[j-1] > integerArray[j]){
+                    temp = integerArray[j-1];
+                    integerArray[j-1] = integerArray[j];
+                    integerArray[j] = temp;
+                }
+
+            }
+        }
+        String arrayOutputString = Arrays.toString(integerArray);
+        arrayOutputString = arrayOutputString.replace(",","");
         arrayOutputString = arrayOutputString.replace("[","");
         arrayOutputString = arrayOutputString.replace("]","");
         arrayOutput.setText(arrayOutputString);
