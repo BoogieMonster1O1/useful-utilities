@@ -68,5 +68,12 @@
   "gui.utilities.expense.reason": "Reason",
   "gui.utilities.expense.amount": "Amount",
   "gui.utilities.expense.makedeposit": "Make the Deposit",
-  "gui.utilities.expense.makewithdrawal": "Make the Withdrawal"
+  "gui.utilities.expense.makewithdrawal": "Make the Withdrawal",
+  "gui.utilities.sort.inputsuggest": "Enter Numeric values seperated by a space",
+  "gui.utilities.sort": "Array Sorter",
+  "gui.utilities.selectionsort": "Selection Sort",
+  "gui.utilities.insertionsort": "Insertion Sort",
+  "gui.utilities.bubblesort": "Bubble Sort",
+  "gui.utilities.sort.clear": "Clear",
+  "gui.utilities.sort.sorted": "Sorted Array"
 }
