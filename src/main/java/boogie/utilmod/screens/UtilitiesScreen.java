@@ -98,6 +98,11 @@ public class UtilitiesScreen extends LightweightGuiDescription {
             }
         });
 
+        WButton arraySort = new WButton(new TranslatableText("gui.utilities.sort"));
+        arraySort.setEnabled(true);
+        root.add(arraySort,0,9,6,1);
+        arraySort.setOnClick(()-> getInstance().openScreen(new UtilityScreens(new TranslatableText(""),new ArraySortScreen())));
+
         WLabel label = new WLabel(new TranslatableText("gui.utilities.title"), 0x000000);
         label.setAlignment(Alignment.CENTER);
         root.add(label, 7, 1, 6, 1);
