@@ -16,9 +16,9 @@ import org.lwjgl.glfw.GLFW;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 public class UsefulUtilitiesClient implements ClientModInitializer {
+    public static final Logger LOGGER = getLogger(UsefulUtilitiesClient.class);
     @Override
     public void onInitializeClient() {
-        final Logger LOGGER = getLogger();
         LOGGER.info(MarkerManager.getMarker("Useful Utilities"),"Starting Useful Utilities...");
         FabricKeyBinding key = FabricKeyBinding.Builder.create(new Identifier("utilmod", "util_key"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.categories.misc").build();
         KeyBindingRegistry.INSTANCE.register(key);
