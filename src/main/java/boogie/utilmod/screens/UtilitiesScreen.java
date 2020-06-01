@@ -103,10 +103,16 @@ public class UtilitiesScreen extends LightweightGuiDescription {
         root.add(arraySort,0,9,6,1);
         arraySort.setOnClick(()-> getInstance().openScreen(new UtilityScreens(new TranslatableText(""),new ArraySortScreen())));
 
-        WButton httpServer = new WButton(new TranslatableText("gui.utilities.monsterhttp"));
+        WButton httpServer = new WButton(new TranslatableText("gui.utilities.monsterhttp.button"));
         httpServer.setEnabled(true);
-        root.add(httpServer,3,9,6,1);
-        httpServer.setOnClick(()-> getInstance().openScreen(new UtilityScreens(new TranslatableText("gui.utilities.monsterhttp"),new MonsterHttpScreen())));
+        root.add(httpServer,7,9,6,1);
+        httpServer.setOnClick(()-> {
+            try {
+                getInstance().openScreen(new UtilityScreens(new TranslatableText("gui.utilities.monsterhttp"),new MonsterHttpScreen()));
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+        });
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.title"), 0x000000);
         label.setAlignment(Alignment.CENTER);

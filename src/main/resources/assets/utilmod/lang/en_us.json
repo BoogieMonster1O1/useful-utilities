@@ -75,5 +75,12 @@
   "gui.utilities.insertionsort": "Insertion Sort",
   "gui.utilities.bubblesort": "Bubble Sort",
   "gui.utilities.sort.clear": "Clear",
-  "gui.utilities.sort.sorted": "Sorted Array"
+  "gui.utilities.sort.sorted": "Sorted Array",
+  "gui.utilities.monsterhttp": "Http Server - Powered by MonsterHTTP",
+  "gui.utilities.monsterhttp.stop": "Stop Server",
+  "gui.utilities.monsterhttp.start": "Start Server",
+  "gui.utilities.monsterhttp.button": "Http Server",
+  "gui.utilities.monsterhttp.visit": "Visit localhost:80 to see the website",
+  "gui.utilities.monsterhttp.online": "Server is online",
+  "gui.utilities.monsterhttp.offline": "Server is offline"
 }

@@ -3,10 +3,10 @@
   "minVersion": "0.8",
   "package": "boogie.utilmod.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  ],
+  "mixins": [],
   "client": [
-    "GameMenuScreenMixin"
+    "GameMenuScreenMixin",
+    "MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1

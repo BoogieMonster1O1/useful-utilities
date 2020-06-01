@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.MarkerManager;
 import org.lwjgl.glfw.GLFW;
 
+import static boogie.utilmod.screens.MonsterHttpScreen.MonsterHTTP.start;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 public class UsefulUtilitiesClient implements ClientModInitializer {
@@ -26,5 +27,6 @@ public class UsefulUtilitiesClient implements ClientModInitializer {
         {
             if(key.isPressed()) MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
         });
+        start();
     }
 }
