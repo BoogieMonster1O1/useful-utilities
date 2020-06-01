@@ -27,18 +27,16 @@ public class MonsterHttpScreen extends LightweightGuiDescription {
         WGridPanel root = new WGridPanel();
         root.setSize(256,128);
         setRootPanel(root);
-        WLabel status;
-        if(InetAddress.getByName("localhost:80").isReachable(5000)) {
-            status = new WLabel(new TranslatableText("gui.utilities.monsterhttp.online"));
+        WLabel status = new WLabel(new TranslatableText("gui.utilities.monsterhttp.online"));
             WButton visit = new WButton(new TranslatableText("gui.utilities.monsterhttp.visit"));
             root.add(visit,2,3,10,1);
-            getInstance().openScreen(new ConfirmChatLinkScreen((bl)->{
-                if (bl) {
-                    Util.getOperatingSystem().open("localhost");
-                }
-            },"localhost",true));
-        }
-        else status = new WLabel(new TranslatableText("gui.utilities.monsterhttp.offline"));
+            visit.setOnClick(()->{
+                getInstance().openScreen(new ConfirmChatLinkScreen((bl)->{
+                    if (bl) {
+                        Util.getOperatingSystem().open("http://localhost:80");
+                    }
+                },"http://localhost:80",true));
+            });
 
         root.validate(this);
         root.add(status,2,1,10,1);
