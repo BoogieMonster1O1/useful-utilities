@@ -1,4 +1,4 @@
-package boogie.utilmod.screens;
+package io.github.boogiemonster1o1.usefulutilities.description;
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
@@ -9,7 +9,7 @@ import net.minecraft.text.TranslatableText;
 
 import java.util.Arrays;
 
-public class ArraySortScreen extends LightweightGuiDescription {
+public class ArraySortDescription extends LightweightGuiDescription {
     @Override
     public void addPainters() {
         getRootPanel().setBackgroundPainter(BackgroundPainter.VANILLA);
@@ -18,7 +18,7 @@ public class ArraySortScreen extends LightweightGuiDescription {
     protected WTextField arrayInput = new WTextField(new TranslatableText("gui.utilities.sort.inputsuggest"));
     protected WTextField arrayOutput = new WTextField(new TranslatableText("gui.utilities.sort.sorted"));
 
-    public ArraySortScreen(){
+    public ArraySortDescription(){
         WGridPanel root = new WGridPanel();
         setRootPanel(root);
         root.setSize(360,256);

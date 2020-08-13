@@ -1,6 +1,5 @@
 {
   "gui.utilities": "Utilities",
-  "key.utilmod.util_key": "Utilities",
   "gui.utilities.calculator": "Calculator",
   "gui.utilities.title": "Available Utilities",
   "gui.utilities.world": "World Info",
@@ -80,7 +79,8 @@
   "gui.utilities.monsterhttp.stop": "Stop Server",
   "gui.utilities.monsterhttp.start": "Start Server",
   "gui.utilities.monsterhttp.button": "Http Server",
-  "gui.utilities.monsterhttp.visit": "Visit localhost:80 to see the website",
+  "gui.utilities.monsterhttp.visit": "Visit website",
   "gui.utilities.monsterhttp.online": "Server is online",
-  "gui.utilities.monsterhttp.offline": "Server is offline"
+  "gui.utilities.monsterhttp.offline": "Server is offline",
+  "gui.utilities.monsterhttp.open": "Open HTML file"
 }

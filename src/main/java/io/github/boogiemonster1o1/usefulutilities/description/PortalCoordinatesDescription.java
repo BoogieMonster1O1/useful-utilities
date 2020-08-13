@@ -1,4 +1,4 @@
-package boogie.utilmod.screens;
+package io.github.boogiemonster1o1.usefulutilities.description;
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
@@ -6,16 +6,15 @@ import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WTextField;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
+
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 
-public class PortalCoordinatesScreen extends LightweightGuiDescription {
-
-    public PortalCoordinatesScreen(){
-
-        WLabel titleput = new WLabel(new TranslatableText("gui.utilities.portal.output"));
-        titleput.setAlignment(Alignment.CENTER);
+public class PortalCoordinatesDescription extends LightweightGuiDescription {
+    public PortalCoordinatesDescription() {
+        WLabel outputTitle = new WLabel(new TranslatableText("gui.utilities.portal.output"));
+        outputTitle.setHorizontalAlignment(HorizontalAlignment.CENTER);
 
         WGridPanel root = new WGridPanel();
         setRootPanel(root);
@@ -23,7 +22,7 @@ public class PortalCoordinatesScreen extends LightweightGuiDescription {
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.portal"));
         root.add(label,4,1,7,1);
-        label.setAlignment(Alignment.CENTER);
+        label.setHorizontalAlignment(HorizontalAlignment.CENTER);
 
         WTextField inputx = new WTextField();
         root.add(inputx,2,3,4,1);
@@ -49,7 +48,7 @@ public class PortalCoordinatesScreen extends LightweightGuiDescription {
                 z*=8.0;
                 outX.setText(new LiteralText("X: " + x));
                 outZ.setText(new LiteralText("Z: " + z));
-                root.add(titleput,4,9,7,1);
+                root.add(outputTitle,4,9,7,1);
             } catch (NumberFormatException exception) {
                 exception.printStackTrace();
             }
@@ -65,7 +64,7 @@ public class PortalCoordinatesScreen extends LightweightGuiDescription {
                 z/=8.0;
                 outX.setText(new LiteralText("X: " + x));
                 outZ.setText(new LiteralText("Z: " + z));
-                root.add(titleput,4,9,7,1);
+                root.add(outputTitle,4,9,7,1);
             } catch (NumberFormatException exception) {
                 exception.printStackTrace();
             }

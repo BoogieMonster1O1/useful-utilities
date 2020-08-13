@@ -1,25 +1,28 @@
-package boogie.utilmod.screens;
+package io.github.boogiemonster1o1.usefulutilities.description;
 
-import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
-import io.github.cottonmc.cotton.gui.widget.*;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.resource.language.I18n;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Identifier;
+import io.github.cottonmc.cotton.gui.widget.WButton;
+import io.github.cottonmc.cotton.gui.widget.WGridPanel;
+import io.github.cottonmc.cotton.gui.widget.WLabel;
+import io.github.cottonmc.cotton.gui.widget.WSprite;
+import io.github.cottonmc.cotton.gui.widget.WTextField;
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.resource.language.I18n;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Identifier;
+
 import static java.lang.Math.round;
 
-public class AlarmScreen extends LightweightGuiDescription {
+public class AlarmDescription extends LightweightGuiDescription {
 
-    public AlarmScreen(){
+    public AlarmDescription(){
         Timer timer = new Timer();
 
         WGridPanel root = new WGridPanel();
@@ -31,7 +34,7 @@ public class AlarmScreen extends LightweightGuiDescription {
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.alarm"));
         root.add(label,4,1,7,1);
-        label.setAlignment(Alignment.CENTER);
+        label.setHorizontalAlignment(HorizontalAlignment.CENTER);
 
         WTextField time = new WTextField();
         time.setSuggestion(new TranslatableText("gui.utilities.alarm.time"));
@@ -45,11 +48,11 @@ public class AlarmScreen extends LightweightGuiDescription {
                 long timeS = round(Double.parseDouble(time.getText()));
                 timeS = timeS * 1000;
                 long finalTime = timeS;
-                MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
+                MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        MinecraftClient.getInstance().openScreen(new TimeOnlyScreen(new TranslatableText("gui.utilities.alarm"),new TimeUpScreen(finalTime)));
+                        MinecraftClient.getInstance().openScreen(new CottonClientScreen(new TranslatableText("gui.utilities.alarm"),new TimeUpDescription(finalTime)));
                         timer.cancel();
                     }
                 }, timeS);
@@ -61,28 +64,22 @@ public class AlarmScreen extends LightweightGuiDescription {
         root.validate(this);
     }
 
-    public static class TimeUpScreen extends LightweightGuiDescription{
+    public static class TimeUpDescription extends LightweightGuiDescription {
         @Override
         public void addPainters() {
             getRootPanel().setBackgroundPainter(BackgroundPainter.VANILLA);
         }
-        TimeUpScreen(long seconds){
+        TimeUpDescription(long seconds){
             seconds/=1000;
 
             WGridPanel panel = new WGridPanel();
             panel.setSize(256,64);
             setRootPanel(panel);
             WLabel head = new WLabel(I18n.translate("gui.utilities.alarm.alarm1") + seconds + " " + I18n.translate("gui.utilities.alarm.alarm2"));
-            head.setAlignment(Alignment.CENTER);
+            head.setHorizontalAlignment(HorizontalAlignment.CENTER);
             panel.add(head,1,1,10,1);
 
             panel.validate(this);
-        }
-    }
-
-    public static class TimeOnlyScreen extends CottonClientScreen {
-        TimeOnlyScreen(Text title, GuiDescription description) {
-            super(title,description);
         }
     }
 

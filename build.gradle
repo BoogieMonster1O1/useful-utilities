@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom' version '0.4.15'
 	id 'maven-publish'
+	id 'com.matthewprenger.cursegradle' version "1.4.0"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -15,9 +16,9 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "io.github.cottonmc:LibGui:1.8.2+1.15.2"
+	modImplementation "io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2"
 
-	include "io.github.cottonmc:LibGui:1.8.2+1.15.2"
+	include "io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2"
 }
 
 repositories {
@@ -69,5 +70,27 @@ publishing {
 	repositories {
 		// uncomment to publish to the local maven
 		// mavenLocal()
+	}
+}
+
+curseforge {
+	if (project.hasProperty('curse_api_key')) {
+		apiKey = project.getProperty('curse_api_key')
+	}
+	project {
+		id = '382093'
+		changelog = 'A changelog can be found at https://github.com/BoogieMonster1O1/useful-utilities/commits'
+		releaseType = 'release'
+		addGameVersion '1.16.2'
+		addGameVersion 'Fabric'
+		mainArtifact(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar")) {
+			displayName = "[${project.minecraft_version}] Useful Utilities ${version}"
+		}
+		afterEvaluate {
+			uploadTask.dependsOn("remapJar")
+		}
+	}
+	options {
+		forgeGradleIntegration = false
 	}
 }

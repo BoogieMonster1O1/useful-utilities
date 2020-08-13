@@ -19,27 +19,17 @@
 
   "environment": "client",
   "entrypoints": {
-    "main": [
-      "boogie.utilmod.UtilitiesMod"
-    ],
     "client": [
-      "boogie.utilmod.UsefulUtilitiesClient"
+      "io.github.boogiemonster1o1.usefulutilities.UsefulUtilities"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
-  ],
-
-  "jars": [
-    {
-      "file":"libgui"
-    }
+    "usefulutilities.mixins.json"
   ],
 
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
-    "minecraft": "1.15.x",
     "libgui": "*"
   }
 }

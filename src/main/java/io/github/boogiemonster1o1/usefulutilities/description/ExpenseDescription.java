@@ -1,11 +1,12 @@
-package boogie.utilmod.screens;
+package io.github.boogiemonster1o1.usefulutilities.description;
 
+import io.github.boogiemonster1o1.usefulutilities.screen.UtilityScreen;
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -23,7 +24,7 @@ import static java.io.File.separator;
 import static net.minecraft.client.MinecraftClient.getInstance;
 import static java.lang.Math.round;
 
-public class ExpenseScreen extends LightweightGuiDescription {
+public class ExpenseDescription extends LightweightGuiDescription {
     private static final String runDirString = getInstance().runDirectory.toString();
     private static final String initValString = runDirString + separator + "init.txt";
     private static final String expensesPath = runDirString + separator + "expenses.txt";
@@ -37,9 +38,9 @@ public class ExpenseScreen extends LightweightGuiDescription {
 
     private static Double currentVal = 0.0;
 
-    private ExpenseScreen() throws IOException {
+    public ExpenseDescription() throws IOException {
 
-        if(current.exists()) getInstance().openScreen(new UtilityScreens(new TranslatableText("gui.utilities.expense"),new ExpenseScreen(true)));
+        if(current.exists()) getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense"),new ExpenseDescription(true)));
         else {
             FileWriter fw = new FileWriter(current);
             current.createNewFile();
@@ -54,7 +55,7 @@ public class ExpenseScreen extends LightweightGuiDescription {
                     double val = Double.parseDouble(initVal.getText());
                     fw.write(Double.toString(val));
                     fw.close();
-                    getInstance().openScreen(new UtilityScreens(new TranslatableText("gui.utilities.expense"), new ExpenseScreen(true)));
+                    getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense"), new ExpenseDescription(true)));
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -67,7 +68,7 @@ public class ExpenseScreen extends LightweightGuiDescription {
         }
     }
 
-    ExpenseScreen(boolean Exists) throws IOException {
+    public ExpenseDescription(boolean Exists) throws IOException {
         if(!Exists) throw new StackOverflowError();
         WPlainPanel root = new WPlainPanel();
         setRootPanel(root);
@@ -89,26 +90,26 @@ public class ExpenseScreen extends LightweightGuiDescription {
             fw.close();
         }
         List<String> expenseData = Files.readAllLines(Paths.get(expensesPath));
-        BiConsumer<String, ExpenseList> expenseBiConsumer = (strinj, destination) -> {
+        BiConsumer<String, ExpensePanel> expenseBiConsumer = (strinj, destination) -> {
             destination.expenseLabel.setText(new LiteralText(strinj));
         };
 
-        WListPanel<String, ExpenseList> expenseListWListPanel = new WListPanel<>(expenseData, ExpenseList::new,expenseBiConsumer);
+        WListPanel<String, ExpensePanel> expenseListWListPanel = new WListPanel<>(expenseData, ExpensePanel::new,expenseBiConsumer);
         expenseListWListPanel.setListItemHeight(25);
 
         root.add(expenseListWListPanel,3,20,188,203);
 
         WLabel balanceLabel = new WLabel(I18n.translate("gui.utilities.expense.bal") + currentVal);
-        balanceLabel.setAlignment(Alignment.CENTER);
+        balanceLabel.setHorizontalAlignment(HorizontalAlignment.CENTER);
         root.add(balanceLabel,205,25,170,10);
 
         WButton depositButton = new WButton(new TranslatableText("gui.utilities.expense.deposit"));
         root.add(depositButton,205,65,170,10);
-        depositButton.setOnClick(()-> getInstance().openScreen(new ExpenseTypeScreen(new TranslatableText("gui.utilities.expense.deposit"),new ExpenseScreen(Type.DEPOSIT))));
+        depositButton.setOnClick(()-> getInstance().openScreen(new ExpenseTypeScreen(new TranslatableText("gui.utilities.expense.deposit"),new ExpenseDescription(Type.DEPOSIT))));
 
         WButton withdrawButton = new WButton(new TranslatableText("gui.utilities.expense.withdraw"));
         root.add(withdrawButton,205,105,170,10);
-        withdrawButton.setOnClick(()-> getInstance().openScreen(new ExpenseTypeScreen(new TranslatableText("gui.utilities.expense.withdraw"),new ExpenseScreen(Type.WITHDRAW))));
+        withdrawButton.setOnClick(()-> getInstance().openScreen(new ExpenseTypeScreen(new TranslatableText("gui.utilities.expense.withdraw"),new ExpenseDescription(Type.WITHDRAW))));
 
         WButton openLog = new WButton(new TranslatableText("gui.utilities.expense.open"));
         root.add(openLog,205,145,170,10);
@@ -122,12 +123,12 @@ public class ExpenseScreen extends LightweightGuiDescription {
 
         WButton resetLog = new WButton(new TranslatableText("gui.utilities.expense.reset"));
         root.add(resetLog,205,185,170,10);
-        resetLog.setOnClick(()-> getInstance().openScreen(new UtilityScreens(new TranslatableText("gui.utilities.expense.deleteconfirm"),new ExpenseScreen("RESET"))));
+        resetLog.setOnClick(()-> getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense.deleteconfirm"),new ExpenseDescription("RESET"))));
 
         root.validate(this);
     }
 
-    private ExpenseScreen(String del){
+    private ExpenseDescription(String del){
         WGridPanel root = new WGridPanel();
         root.setSize(164,128);
         setRootPanel(root);
@@ -136,7 +137,7 @@ public class ExpenseScreen extends LightweightGuiDescription {
         deleteField.setSuggestion(I18n.translate("gui.utilities.expense.deleteplaceholder"));
 
         WButton doneButton = new WButton(new TranslatableText("gui.utilities.expense.deleteokay"));
-        doneButton.setAlignment(Alignment.CENTER);
+        doneButton.setAlignment(HorizontalAlignment.CENTER);
 
         root.add(deleteField,1,1,7,1);
         root.add(doneButton,1,3,7,1);
@@ -146,9 +147,9 @@ public class ExpenseScreen extends LightweightGuiDescription {
             if(del.equals(textDel)){
                 expenses.delete();
                 current.delete();
-                getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
+                getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
             }
-            else getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
+            else getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
         });
 
         root.validate(this);
@@ -163,14 +164,14 @@ public class ExpenseScreen extends LightweightGuiDescription {
         @Override
         public void onClose() {
             try {
-                getInstance().openScreen(new UtilityScreens(new TranslatableText("gui.utilities.expense"),new ExpenseScreen(true)));
+                getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense"),new ExpenseDescription(true)));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private ExpenseScreen(Type type){
+    private ExpenseDescription(Type type){
 
         WPlainPanel root = new WPlainPanel();
         setRootPanel(root);
@@ -199,7 +200,7 @@ public class ExpenseScreen extends LightweightGuiDescription {
                     FileWriter fw0 = new FileWriter(current);
                     fw0.write(Double.toString(currentVal));
                     fw0.close();
-                    getInstance().openScreen(new UtilityScreens(new ExpenseScreen(true)));
+                    getInstance().openScreen(new UtilityScreen(new ExpenseDescription(true)));
                 } catch (Exception exp) {
                     exp.printStackTrace();
                 }
@@ -226,7 +227,7 @@ public class ExpenseScreen extends LightweightGuiDescription {
                     FileWriter fw0 = new FileWriter(current);
                     fw0.write(Double.toString(currentVal));
                     fw0.close();
-                    getInstance().openScreen(new UtilityScreens(new ExpenseScreen(true)));
+                    getInstance().openScreen(new UtilityScreen(new ExpenseDescription(true)));
                 } catch (Exception exp) {
                     exp.printStackTrace();
                 }
@@ -239,27 +240,17 @@ public class ExpenseScreen extends LightweightGuiDescription {
         root.validate(this);
     }
 
-    private static class ExpenseList extends WPlainPanel{
-        private WLabel expenseLabel;
+    private static class ExpensePanel extends WPlainPanel {
+        private final WLabel expenseLabel;
 
-        ExpenseList(){
+        public ExpensePanel(){
             expenseLabel = new WLabel("");
             this.add(expenseLabel, 1, 2, 100, 10);
         }
     }
 
-    static class ExpenseMainScreen extends CottonClientScreen{
-        ExpenseMainScreen() throws IOException {
-            super(new TranslatableText("gui.utilities.expense"), new ExpenseScreen());
-        }
-
-        @Override
-        public void onClose() {
-            getInstance().openScreen(new CottonClientScreen(new UtilitiesScreen()));
-        }
-    }
-
     enum Type{
-        DEPOSIT,WITHDRAW
+        DEPOSIT,
+        WITHDRAW
     }
 }

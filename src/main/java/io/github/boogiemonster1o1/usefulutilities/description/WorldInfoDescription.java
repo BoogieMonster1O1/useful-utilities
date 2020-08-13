@@ -1,32 +1,28 @@
-package boogie.utilmod.screens;
+package io.github.boogiemonster1o1.usefulutilities.description;
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 
-import static java.lang.Math.*;
-
-public class WorldInfoScreen extends LightweightGuiDescription {
-
-    WorldInfoScreen(){
+public class WorldInfoDescription extends LightweightGuiDescription {
+    public WorldInfoDescription(){
         WGridPanel root = new WGridPanel();
         root.setSize(356,204);
         setRootPanel(root);
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.world"));
         root.add(label,5,1,10,1);
-        label.setAlignment(Alignment.CENTER);
+        label.setHorizontalAlignment(HorizontalAlignment.CENTER);
         PlayerEntity player = MinecraftClient.getInstance().player;
         World world;
         assert player != null;
@@ -41,11 +37,11 @@ public class WorldInfoScreen extends LightweightGuiDescription {
         if(raining) weather = I18n.translate("gui.utilities.world.raining");
         if(thundering) weather = I18n.translate("gui.utilities.world.thundering");
         double x = player.getX();
-        x = floor(x*10000) / 10000.0;
+        x = Math.floor(x*10000) / 10000.0;
         double y = player.getY();
-        y = floor(y*10000) / 10000.0;
+        y = Math.floor(y*10000) / 10000.0;
         double z = player.getZ();
-        z = floor(z*10000) / 10000.0;
+        z = Math.floor(z*10000) / 10000.0;
 
         String biome = playerbiome.toString();
         String pchunk = chunk.toString();

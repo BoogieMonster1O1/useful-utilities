@@ -1,30 +1,31 @@
-package boogie.utilmod.screens;
+package io.github.boogiemonster1o1.usefulutilities.description;
 
+import io.github.boogiemonster1o1.usefulutilities.screen.YourCPSIsScreen;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WLabeledSlider;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import io.github.cottonmc.cotton.gui.widget.data.Axis;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class ClicksPerSecondScreen extends LightweightGuiDescription {
-
+public class ClicksPerSecondDescription extends LightweightGuiDescription {
     private boolean begin = false;
     private double cps = 0;
     private double clicks = 0;
     private int time = 0;
     private Timer timer = null;
 
-    public ClicksPerSecondScreen(){
+    public ClicksPerSecondDescription(){
 
         WGridPanel root = new WGridPanel();
         setRootPanel(root);
@@ -32,7 +33,7 @@ public class ClicksPerSecondScreen extends LightweightGuiDescription {
         root.validate(this);
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.cps"));
-        label.setAlignment(Alignment.CENTER);
+        label.setHorizontalAlignment(HorizontalAlignment.CENTER);
         root.add(label,1,1,7,1);
 
         WLabeledSlider seconds = new WLabeledSlider(5,30,Axis.HORIZONTAL);
@@ -71,6 +72,6 @@ public class ClicksPerSecondScreen extends LightweightGuiDescription {
 
     @Override
     public void addPainters() {
-        getRootPanel().setBackgroundPainter(BackgroundPainter.VANILLA);
+        this.getRootPanel().setBackgroundPainter(BackgroundPainter.VANILLA);
     }
 }

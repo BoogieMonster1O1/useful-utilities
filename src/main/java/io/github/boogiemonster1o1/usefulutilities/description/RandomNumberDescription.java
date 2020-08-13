@@ -1,5 +1,6 @@
-package boogie.utilmod.screens;
+package io.github.boogiemonster1o1.usefulutilities.description;
 
+import io.github.boogiemonster1o1.usefulutilities.screen.UtilityScreen;
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
@@ -8,20 +9,21 @@ import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WTextField;
-import io.github.cottonmc.cotton.gui.widget.data.Alignment;
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
+
+import java.util.Random;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-import java.util.Random;
-
+import static io.github.boogiemonster1o1.usefulutilities.description.RandomNumberDescription.DiceRollScreen.DiceHasRolledScreen;
 import static java.lang.Math.*;
-import static boogie.utilmod.screens.DiceOnD3mandScreen.DiceRollScreen.DiceHasRolledScreen;
 import static java.util.concurrent.ThreadLocalRandom.current;
 
-public class DiceOnD3mandScreen extends LightweightGuiDescription {
-    DiceOnD3mandScreen(){
+public class RandomNumberDescription extends LightweightGuiDescription {
+    public RandomNumberDescription() {
        Random rand = new Random();
 
        WGridPanel root = new WGridPanel();
@@ -30,7 +32,7 @@ public class DiceOnD3mandScreen extends LightweightGuiDescription {
 
        WLabel label = new WLabel(new TranslatableText("gui.utilities.random"));
        root.add(label,4,1,7,1);
-       label.setAlignment(Alignment.CENTER);
+       label.setHorizontalAlignment(HorizontalAlignment.CENTER);
 
        WTextField range1 = new WTextField();
        root.add(range1,2,3,4,1);
@@ -70,7 +72,7 @@ public class DiceOnD3mandScreen extends LightweightGuiDescription {
         }
         @Override
         public void onClose(){
-            MinecraftClient.getInstance().openScreen(new UtilityScreens(new DiceOnD3mandScreen() ));
+            MinecraftClient.getInstance().openScreen(new UtilityScreen(new RandomNumberDescription() ));
         }
         static class DiceHasRolledScreen extends LightweightGuiDescription{
             DiceHasRolledScreen(long val){
