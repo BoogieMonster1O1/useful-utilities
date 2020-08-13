@@ -18,12 +18,14 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 
 public class UsefulUtilities implements ClientModInitializer {
     public static final Logger LOGGER = getLogger(UsefulUtilities.class);
+
     @Override
     public void onInitializeClient() {
-        LOGGER.info(MarkerManager.getMarker("Useful Utilities"),"Starting Useful Utilities...");
+        LOGGER.info(MarkerManager.getMarker("Useful Utilities"), "Starting Useful Utilities...");
         KeyBinding key = KeyBindingHelper.registerKeyBinding(new KeyBinding("gui.utilities", GLFW.GLFW_KEY_U, "key.categories.misc"));
         ClientTickEvents.END_CLIENT_TICK.register(event -> {
-            if(key.isPressed()) MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
+            if (key.isPressed())
+                MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
         });
         MonsterHttp.startServer();
     }

@@ -22,29 +22,29 @@ import static java.lang.Math.round;
 
 public class AlarmDescription extends LightweightGuiDescription {
 
-    public AlarmDescription(){
+    public AlarmDescription() {
         Timer timer = new Timer();
 
         WGridPanel root = new WGridPanel();
         setRootPanel(root);
-        root.setSize(256,160);
+        root.setSize(256, 160);
 
         WSprite clock = new WSprite(new Identifier("minecraft:textures/item/clock_00.png"));
-        root.add(clock,1,1,2,2);
+        root.add(clock, 1, 1, 2, 2);
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.alarm"));
-        root.add(label,4,1,7,1);
+        root.add(label, 4, 1, 7, 1);
         label.setHorizontalAlignment(HorizontalAlignment.CENTER);
 
         WTextField time = new WTextField();
         time.setSuggestion(new TranslatableText("gui.utilities.alarm.time"));
-        root.add(time,4,3,6,1);
+        root.add(time, 4, 3, 6, 1);
 
         WButton set = new WButton(new TranslatableText("gui.utilities.alarm.set"));
         set.setEnabled(true);
-        root.add(set,3,5,8,1);
-        set.setOnClick(()->{
-            try{
+        root.add(set, 3, 5, 8, 1);
+        set.setOnClick(() -> {
+            try {
                 long timeS = round(Double.parseDouble(time.getText()));
                 timeS = timeS * 1000;
                 long finalTime = timeS;
@@ -52,7 +52,7 @@ public class AlarmDescription extends LightweightGuiDescription {
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        MinecraftClient.getInstance().openScreen(new CottonClientScreen(new TranslatableText("gui.utilities.alarm"),new TimeUpDescription(finalTime)));
+                        MinecraftClient.getInstance().openScreen(new CottonClientScreen(new TranslatableText("gui.utilities.alarm"), new TimeUpDescription(finalTime)));
                         timer.cancel();
                     }
                 }, timeS);
@@ -69,15 +69,16 @@ public class AlarmDescription extends LightweightGuiDescription {
         public void addPainters() {
             getRootPanel().setBackgroundPainter(BackgroundPainter.VANILLA);
         }
-        TimeUpDescription(long seconds){
-            seconds/=1000;
+
+        TimeUpDescription(long seconds) {
+            seconds /= 1000;
 
             WGridPanel panel = new WGridPanel();
-            panel.setSize(256,64);
+            panel.setSize(256, 64);
             setRootPanel(panel);
             WLabel head = new WLabel(I18n.translate("gui.utilities.alarm.alarm1") + seconds + " " + I18n.translate("gui.utilities.alarm.alarm2"));
             head.setHorizontalAlignment(HorizontalAlignment.CENTER);
-            panel.add(head,1,1,10,1);
+            panel.add(head, 1, 1, 10, 1);
 
             panel.validate(this);
         }

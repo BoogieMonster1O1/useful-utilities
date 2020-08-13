@@ -9,19 +9,20 @@ import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WSprite;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+
+import java.io.File;
+import java.io.IOException;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
-import java.io.File;
-import java.io.IOException;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
 public class UtilitiesListDescription extends LightweightGuiDescription {
-    public UtilitiesListDescription(){
+    public UtilitiesListDescription() {
         if (MinecraftClient.getInstance().player == null) {
             return;
         }
@@ -43,17 +44,17 @@ public class UtilitiesListDescription extends LightweightGuiDescription {
         WButton cps = new WButton(new TranslatableText("gui.utilities.cps"));
         cps.setEnabled(true);
         root.add(cps, 7, 3, 6, 1);
-        cps.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreen(new ClicksPerSecondDescription())));
+        cps.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreen(new ClicksPerSecondDescription())));
 
         WButton portal = new WButton(new TranslatableText("gui.utilities.portal"));
         portal.setEnabled(true);
         root.add(portal, 14, 3, 6, 1);
-        portal.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreen(new PortalCoordinatesDescription())));
+        portal.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreen(new PortalCoordinatesDescription())));
 
         WButton random = new WButton(new TranslatableText("gui.utilities.random"));
         random.setEnabled(true);
         root.add(random, 0, 5, 6, 1);
-        random.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreen(new RandomNumberDescription())));
+        random.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreen(new RandomNumberDescription())));
 
         WButton alarm = new WButton(new TranslatableText("gui.utilities.alarm"));
         alarm.setEnabled(true);
@@ -67,31 +68,30 @@ public class UtilitiesListDescription extends LightweightGuiDescription {
 
         WButton worldseed = new WButton(new TranslatableText("gui.utilities.world"));
         worldseed.setEnabled(true);
-        root.add(worldseed,0,7,6,1);
-        worldseed.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreen(new WorldInfoDescription())));
+        root.add(worldseed, 0, 7, 6, 1);
+        worldseed.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreen(new WorldInfoDescription())));
 
         WButton keyboard = new WButton(new TranslatableText("gui.utilities.keyboard"));
         keyboard.setEnabled(true);
-        root.add(keyboard,7,7,6,1);
-        keyboard.setOnClick(()-> MinecraftClient.getInstance().openScreen(new PianoDescription.KeyboardMainScreen()));
+        root.add(keyboard, 7, 7, 6, 1);
+        keyboard.setOnClick(() -> MinecraftClient.getInstance().openScreen(new PianoDescription.KeyboardMainScreen()));
 
         WButton expense = new WButton(new TranslatableText("gui.utilities.expense"));
         expense.setEnabled(true);
-        root.add(expense,14,7,6,1);
-        expense.setOnClick(()->{
+        root.add(expense, 14, 7, 6, 1);
+        expense.setOnClick(() -> {
             File initFIle = new File(MinecraftClient.getInstance().runDirectory.toString() + File.separator + "init.txt");
-            if(!initFIle.exists()){
-                expense.setOnClick(()-> {
+            if (!initFIle.exists()) {
+                expense.setOnClick(() -> {
                     try {
                         MinecraftClient.getInstance().openScreen(new ExpenseScreen());
                     } catch (IOException exemption) {
                         exemption.printStackTrace();
                     }
                 });
-            }
-            else {
+            } else {
                 try {
-                    MinecraftClient.getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense"),new ExpenseDescription(true)));
+                    MinecraftClient.getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense"), new ExpenseDescription(true)));
                 } catch (IOException expectation) {
                     expectation.printStackTrace();
                 }
@@ -100,15 +100,15 @@ public class UtilitiesListDescription extends LightweightGuiDescription {
 
         WButton arraySort = new WButton(new TranslatableText("gui.utilities.sort"));
         arraySort.setEnabled(true);
-        root.add(arraySort,0,9,6,1);
-        arraySort.setOnClick(()-> MinecraftClient.getInstance().openScreen(new UtilityScreen(new TranslatableText(""),new ArraySortDescription())));
+        root.add(arraySort, 0, 9, 6, 1);
+        arraySort.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreen(new TranslatableText(""), new ArraySortDescription())));
 
         WButton httpServer = new WButton(new TranslatableText("gui.utilities.monsterhttp.button"));
         httpServer.setEnabled(true);
-        root.add(httpServer,7,9,6,1);
-        httpServer.setOnClick(()-> {
+        root.add(httpServer, 7, 9, 6, 1);
+        httpServer.setOnClick(() -> {
             try {
-                MinecraftClient.getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.monsterhttp"),new HttpServerDescription()));
+                MinecraftClient.getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.monsterhttp"), new HttpServerDescription()));
             } catch (Throwable e) {
                 e.printStackTrace();
             }

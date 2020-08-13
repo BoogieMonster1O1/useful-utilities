@@ -19,12 +19,12 @@ public class MonsterHttpHandler implements HttpHandler {
         String response = "<html><h1>It Works!</h1></html>";
         try {
             File webFile = new File(getInstance().runDirectory + separator + "web.txt");
-            if(!webFile.exists()){
+            if (!webFile.exists()) {
                 webFile.createNewFile();
-                Files.write(Paths.get(webFile.getPath()),response.getBytes(UTF_8));
+                Files.write(Paths.get(webFile.getPath()), response.getBytes(UTF_8));
             }
-            response = Arrays.toString(Files.readAllLines(webFile.toPath()).toArray()).replace(",","").replace("[","").replace("]","");
-            exchange.sendResponseHeaders(200,response.getBytes(UTF_8).length);
+            response = Arrays.toString(Files.readAllLines(webFile.toPath()).toArray()).replace(",", "").replace("[", "").replace("]", "");
+            exchange.sendResponseHeaders(200, response.getBytes(UTF_8).length);
             OutputStream writer = exchange.getResponseBody();
             writer.write(response.getBytes());
             writer.flush();

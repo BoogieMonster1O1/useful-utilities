@@ -17,22 +17,22 @@ import static net.minecraft.client.MinecraftClient.getInstance;
 public class HttpServerDescription extends LightweightGuiDescription {
     public HttpServerDescription() throws RuntimeException {
         WGridPanel root = new WGridPanel();
-        root.setSize(256,128);
+        root.setSize(256, 128);
         setRootPanel(root);
         WButton visit = new WButton(new TranslatableText("gui.utilities.monsterhttp.visit"));
-        root.add(visit,1,3,12,1);
-        visit.setOnClick(()->{
-            getInstance().openScreen(new ConfirmChatLinkScreen((bl)->{
+        root.add(visit, 1, 3, 12, 1);
+        visit.setOnClick(() -> {
+            getInstance().openScreen(new ConfirmChatLinkScreen((bl) -> {
                 if (bl) {
                     Util.getOperatingSystem().open("http://localhost:80");
                 }
-                getInstance().openScreen(new CottonClientScreen(new TranslatableText("gui.utilities.monsterhttp"),this));
-            },"http://localhost:80",true));
+                getInstance().openScreen(new CottonClientScreen(new TranslatableText("gui.utilities.monsterhttp"), this));
+            }, "http://localhost:80", true));
         });
 
         WButton open = new WButton(new TranslatableText("gui.utilities.monsterhttp.open"));
-        root.add(open,1,5,12,1);
-        open.setOnClick(()->{
+        root.add(open, 1, 5, 12, 1);
+        open.setOnClick(() -> {
             Util.getOperatingSystem().open(new File(getInstance().runDirectory + separator + "web.txt"));
         });
 

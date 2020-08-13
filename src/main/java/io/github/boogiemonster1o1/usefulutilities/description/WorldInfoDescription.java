@@ -5,6 +5,7 @@ import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,13 +16,13 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 
 public class WorldInfoDescription extends LightweightGuiDescription {
-    public WorldInfoDescription(){
+    public WorldInfoDescription() {
         WGridPanel root = new WGridPanel();
-        root.setSize(356,204);
+        root.setSize(356, 204);
         setRootPanel(root);
 
         WLabel label = new WLabel(new TranslatableText("gui.utilities.world"));
-        root.add(label,5,1,10,1);
+        root.add(label, 5, 1, 10, 1);
         label.setHorizontalAlignment(HorizontalAlignment.CENTER);
         PlayerEntity player = MinecraftClient.getInstance().player;
         World world;
@@ -34,14 +35,14 @@ public class WorldInfoDescription extends LightweightGuiDescription {
         boolean raining = world.isRaining();
         boolean thundering = world.isThundering();
         String weather = I18n.translate("gui.utilities.world.clear");
-        if(raining) weather = I18n.translate("gui.utilities.world.raining");
-        if(thundering) weather = I18n.translate("gui.utilities.world.thundering");
+        if (raining) weather = I18n.translate("gui.utilities.world.raining");
+        if (thundering) weather = I18n.translate("gui.utilities.world.thundering");
         double x = player.getX();
-        x = Math.floor(x*10000) / 10000.0;
+        x = Math.floor(x * 10000) / 10000.0;
         double y = player.getY();
-        y = Math.floor(y*10000) / 10000.0;
+        y = Math.floor(y * 10000) / 10000.0;
         double z = player.getZ();
-        z = Math.floor(z*10000) / 10000.0;
+        z = Math.floor(z * 10000) / 10000.0;
 
         String biome = playerbiome.toString();
         String pchunk = chunk.toString();
@@ -51,27 +52,28 @@ public class WorldInfoDescription extends LightweightGuiDescription {
         String uuid = player.getUuidAsString();
         String pos = "X:" + x + " Y:" + y + " Z:" + z;
 
-        biome = biome.replaceAll("net.minecraft.world.biome.","");
-        pchunk = pchunk.replaceAll("net.minecraft.world.chunk.","");
+        biome = biome.replaceAll("net.minecraft.world.biome.", "");
+        pchunk = pchunk.replaceAll("net.minecraft.world.chunk.", "");
 
         WLabel biomeLabel = new WLabel(I18n.translate("gui.utilities.world.biome") + biome);
         WLabel pchunkLabel = new WLabel(I18n.translate("gui.utilities.world.chunk") + pchunk);
         WLabel diffLabel = new WLabel(I18n.translate("gui.utilities.world.difficulty") + diff);
-        WLabel wtimeLabel = new WLabel(I18n.translate("gui.utilities.world.time")+ wtime);
+        WLabel wtimeLabel = new WLabel(I18n.translate("gui.utilities.world.time") + wtime);
         WLabel wthrLabel = new WLabel(I18n.translate("gui.utilities.world.weather") + wthr);
         WLabel uuidLabel = new WLabel(I18n.translate("gui.utilities.world.uuid") + uuid);
         WLabel posLabel = new WLabel(I18n.translate("gui.utilities.world.pos") + pos);
 
-        root.add(posLabel,1,3,8,1);
-        root.add(uuidLabel,1,4,8,1);
-        root.add(wthrLabel,1,5,8,1);
-        root.add(diffLabel,1,6,8,1);
-        root.add(pchunkLabel,1,7,8,1);
-        root.add(biomeLabel,1,8,8,1);
-        root.add(wtimeLabel,1,9,8,1);
+        root.add(posLabel, 1, 3, 8, 1);
+        root.add(uuidLabel, 1, 4, 8, 1);
+        root.add(wthrLabel, 1, 5, 8, 1);
+        root.add(diffLabel, 1, 6, 8, 1);
+        root.add(pchunkLabel, 1, 7, 8, 1);
+        root.add(biomeLabel, 1, 8, 8, 1);
+        root.add(wtimeLabel, 1, 9, 8, 1);
 
         root.validate(this);
     }
+
     @Override
     public void addPainters() {
         getRootPanel().setBackgroundPainter(BackgroundPainter.VANILLA);

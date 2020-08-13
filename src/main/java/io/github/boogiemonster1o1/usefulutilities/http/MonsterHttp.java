@@ -8,6 +8,7 @@ import com.sun.net.httpserver.HttpServer;
 
 public class MonsterHttp {
     private static HttpServer server;
+
     public static void startServer() {
         try {
             server = HttpServer.create(new InetSocketAddress(80), 0);
@@ -20,8 +21,8 @@ public class MonsterHttp {
         }
     }
 
-    public static void stopServer(){
-        try{
+    public static void stopServer() {
+        try {
             server.stop(0);
             UsefulUtilities.LOGGER.info("MonsterHTTP stopped");
         } catch (Exception e) {
