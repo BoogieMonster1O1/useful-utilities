@@ -12,15 +12,12 @@ import io.github.cottonmc.cotton.gui.widget.WTextField;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-
-import static io.github.boogiemonster1o1.usefulutilities.description.RandomNumberDescription.DiceRollScreen.DiceHasRolledScreen;
-import static java.lang.Math.*;
-import static java.util.concurrent.ThreadLocalRandom.current;
 
 public class RandomNumberDescription extends LightweightGuiDescription {
     public RandomNumberDescription() {
@@ -46,14 +43,14 @@ public class RandomNumberDescription extends LightweightGuiDescription {
         root.add(roll, 2, 5, 10, 1);
         roll.setOnClick(() -> {
             try {
-                long from = abs(round(floor(Double.parseDouble(range1.getText()))));
-                long to = abs(round(floor(Double.parseDouble(range2.getText())))) + 1;
+                long from = Math.abs(Math.round(Math.floor(Double.parseDouble(range1.getText()))));
+                long to = Math.abs(Math.round(Math.floor(Double.parseDouble(range2.getText())))) + 1;
                 if (from == to) {
-                    MinecraftClient.getInstance().openScreen(new DiceRollScreen(new TranslatableText("gui.utilities.random.rolled0"), new DiceHasRolledScreen(from)));
+                    MinecraftClient.getInstance().openScreen(new DiceRollScreen(new TranslatableText("gui.utilities.random.rolled0"), new DiceRollScreen.DiceHasRolledScreen(from)));
                 } else if (from > to) throw new Exception();
                 else {
-                    long dice = current().nextLong(from, to);
-                    MinecraftClient.getInstance().openScreen(new DiceRollScreen(new TranslatableText("gui.utilities.random.rolled0"), new DiceHasRolledScreen(dice)));
+                    long dice = ThreadLocalRandom.current().nextLong(from, to);
+                    MinecraftClient.getInstance().openScreen(new DiceRollScreen(new TranslatableText("gui.utilities.random.rolled0"), new DiceRollScreen.DiceHasRolledScreen(dice)));
                 }
 
             } catch (Exception exception) {

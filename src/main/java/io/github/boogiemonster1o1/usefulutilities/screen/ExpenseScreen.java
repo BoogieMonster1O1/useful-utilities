@@ -6,9 +6,8 @@ import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
 
 import java.io.IOException;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.TranslatableText;
-
-import static net.minecraft.client.MinecraftClient.getInstance;
 
 public class ExpenseScreen extends CottonClientScreen {
     public ExpenseScreen() throws IOException {
@@ -17,6 +16,6 @@ public class ExpenseScreen extends CottonClientScreen {
 
     @Override
     public void onClose() {
-        getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
+        MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
     }
 }

@@ -18,8 +18,6 @@ import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
-import static java.lang.Math.round;
-
 public class AlarmDescription extends LightweightGuiDescription {
 
     public AlarmDescription() {
@@ -45,7 +43,7 @@ public class AlarmDescription extends LightweightGuiDescription {
         root.add(set, 3, 5, 8, 1);
         set.setOnClick(() -> {
             try {
-                long timeS = round(Double.parseDouble(time.getText()));
+                long timeS = Math.round(Double.parseDouble(time.getText()));
                 timeS = timeS * 1000;
                 long finalTime = timeS;
                 MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
