@@ -53,7 +53,9 @@ public class WorldInfoDescription extends LightweightGuiDescription {
         String pos = "X:" + x + " Y:" + y + " Z:" + z;
 
         biome = biome.replaceAll("net.minecraft.world.biome.", "");
+        biome = biome.replaceAll("net.minecraft.class_1959", "Biome");
         pchunk = pchunk.replaceAll("net.minecraft.world.chunk.", "");
+        pchunk = pchunk.replaceAll("net.minecraft.class_2791", "Chunk");
 
         WLabel biomeLabel = new WLabel(I18n.translate("gui.utilities.world.biome") + biome);
         WLabel pchunkLabel = new WLabel(I18n.translate("gui.utilities.world.chunk") + pchunk);
@@ -78,5 +80,4 @@ public class WorldInfoDescription extends LightweightGuiDescription {
     public void addPainters() {
         getRootPanel().setBackgroundPainter(BackgroundPainter.VANILLA);
     }
-
 }
