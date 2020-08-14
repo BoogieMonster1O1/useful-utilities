@@ -1,5 +1,6 @@
 package io.github.boogiemonster1o1.usefulutilities;
 
+import io.github.boogiemonster1o1.usefulutilities.api.UtilityManager;
 import io.github.boogiemonster1o1.usefulutilities.description.UtilitiesListDescription;
 import io.github.boogiemonster1o1.usefulutilities.http.MonsterHttp;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
@@ -28,5 +29,6 @@ public class UsefulUtilities implements ClientModInitializer {
                 MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
         });
         MonsterHttp.startServer();
+        UtilityManager.execute();
     }
 }

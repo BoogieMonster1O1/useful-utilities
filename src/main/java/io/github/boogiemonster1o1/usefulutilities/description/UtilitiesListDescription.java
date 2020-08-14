@@ -1,7 +1,8 @@
 package io.github.boogiemonster1o1.usefulutilities.description;
 
-import io.github.boogiemonster1o1.usefulutilities.screen.ExpenseScreen;
-import io.github.boogiemonster1o1.usefulutilities.screen.UtilityScreen;
+import io.github.boogiemonster1o1.usefulutilities.api.UtilityManager;
+import io.github.boogiemonster1o1.usefulutilities.api.UtilityScreen;
+import io.github.boogiemonster1o1.usefulutilities.description.screen.ExpenseScreen;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;
@@ -22,6 +23,9 @@ import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
 public class UtilitiesListDescription extends LightweightGuiDescription {
+    private int x = 14;
+    private int y = 9;
+
     public UtilitiesListDescription() {
         if (MinecraftClient.getInstance().player == null) {
             return;
@@ -119,6 +123,17 @@ public class UtilitiesListDescription extends LightweightGuiDescription {
         root.add(label, 7, 1, 6, 1);
 
         root.validate(this);
+
+        UtilityManager.getInstance().getButtons().forEach((button) -> this.addUtilityButton(button, root));
+    }
+
+    public void addUtilityButton(WButton button, WGridPanel panel) {
+        panel.add(button, this.x, this.y);
+        if(this.x == 14) {
+            this.x = 0;
+            this.y += 2;
+        }
+        x += 7;
     }
 
     @Override

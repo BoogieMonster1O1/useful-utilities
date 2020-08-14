@@ -1,6 +1,6 @@
 package io.github.boogiemonster1o1.usefulutilities.description;
 
-import io.github.boogiemonster1o1.usefulutilities.screen.UtilityScreen;
+import io.github.boogiemonster1o1.usefulutilities.api.UtilityScreen;
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;

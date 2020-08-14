@@ -1,4 +1,4 @@
-package io.github.boogiemonster1o1.usefulutilities.screen;
+package io.github.boogiemonster1o1.usefulutilities.api;
 
 import io.github.boogiemonster1o1.usefulutilities.description.UtilitiesListDescription;
 import io.github.cottonmc.cotton.gui.GuiDescription;
@@ -21,7 +21,11 @@ public class UtilityScreen extends CottonClientScreen {
     }
 
     @Override
-    public void onClose() {
+    public final void onClose() {
+        this.beforeClose();
         MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
+    }
+
+    public void beforeClose() {
     }
 }

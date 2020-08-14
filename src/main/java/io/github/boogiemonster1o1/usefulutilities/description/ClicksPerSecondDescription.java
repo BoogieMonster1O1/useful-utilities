@@ -1,6 +1,6 @@
 package io.github.boogiemonster1o1.usefulutilities.description;
 
-import io.github.boogiemonster1o1.usefulutilities.screen.YourCPSIsScreen;
+import io.github.boogiemonster1o1.usefulutilities.description.screen.YourCPSIsScreen;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;

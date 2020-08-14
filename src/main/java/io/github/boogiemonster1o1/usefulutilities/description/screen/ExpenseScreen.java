@@ -1,4 +1,4 @@
-package io.github.boogiemonster1o1.usefulutilities.screen;
+package io.github.boogiemonster1o1.usefulutilities.description.screen;
 
 import io.github.boogiemonster1o1.usefulutilities.description.ExpenseDescription;
 import io.github.boogiemonster1o1.usefulutilities.description.UtilitiesListDescription;
