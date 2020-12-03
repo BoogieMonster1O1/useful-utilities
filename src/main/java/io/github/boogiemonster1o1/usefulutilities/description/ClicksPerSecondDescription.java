@@ -1,5 +1,6 @@
 package io.github.boogiemonster1o1.usefulutilities.description;
 
+import io.github.boogiemonster1o1.usefulutilities.description.screen.CpsOutputScreen;
 import io.github.boogiemonster1o1.usefulutilities.description.screen.YourCPSIsScreen;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
@@ -53,7 +54,7 @@ public class ClicksPerSecondDescription extends LightweightGuiDescription {
                     @Override
                     public void run() {
                         cps = clicks / time;
-                        MinecraftClient.getInstance().openScreen(new YourCPSIsScreen(new YourCPSIsScreen.CPSOutputScreen(cps)));
+                        MinecraftClient.getInstance().openScreen(new YourCPSIsScreen(new CpsOutputScreen(cps)));
                         timer.cancel();
                         timer = null;
                         root.add(seconds, 1, 5, 7, 1);
