@@ -17,7 +17,7 @@ public class UtilityManager {
     private static UtilityManager instance = null;
 
     public int getUtilitiesCount() {
-        return utilitiesCount;
+        return this.utilitiesCount;
     }
 
     private UtilityManager() {
@@ -28,20 +28,18 @@ public class UtilityManager {
         WButton button = new WButton();
         button.setOnClick(() -> MinecraftClient.getInstance().openScreen(screen));
         button.setLabel(label);
-        buttons.add(button);
-        utilitiesCount++;
-    }
-
-    public static void execute() {
-        instance = new UtilityManager();
-        FabricLoader.getInstance().getEntrypoints("usefulutilities", UsefulUtilitiesApi.class).forEach((api) -> api.initializeUtilities(instance));
+        this.buttons.add(button);
+        this.utilitiesCount++;
     }
 
     public Set<WButton> getButtons() {
-        return buttons;
+        return this.buttons;
     }
 
     public static UtilityManager getInstance() {
+        if (instance == null) {
+            instance = new UtilityManager();
+        }
         return instance;
     }
 }

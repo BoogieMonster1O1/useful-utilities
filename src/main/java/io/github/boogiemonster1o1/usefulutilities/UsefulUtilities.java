@@ -1,5 +1,6 @@
 package io.github.boogiemonster1o1.usefulutilities;
 
+import io.github.boogiemonster1o1.usefulutilities.api.UsefulUtilitiesApi;
 import io.github.boogiemonster1o1.usefulutilities.api.UtilityManager;
 import io.github.boogiemonster1o1.usefulutilities.description.UtilitiesListDescription;
 import io.github.boogiemonster1o1.usefulutilities.http.MonsterHttp;
@@ -16,6 +17,7 @@ import net.minecraft.client.options.KeyBinding;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.loader.entrypoint.minecraft.hooks.EntrypointUtils;
 
 public class UsefulUtilities implements ClientModInitializer {
     public static final Logger LOGGER = LogManager.getLogger(UsefulUtilities.class);
@@ -25,10 +27,12 @@ public class UsefulUtilities implements ClientModInitializer {
         LOGGER.info(MarkerManager.getMarker("Useful Utilities"), "Starting Useful Utilities...");
         KeyBinding key = KeyBindingHelper.registerKeyBinding(new KeyBinding("gui.utilities", GLFW.GLFW_KEY_U, "key.categories.misc"));
         ClientTickEvents.END_CLIENT_TICK.register(event -> {
-            if (key.isPressed())
+            if (key.isPressed()) {
                 MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
+            }
         });
         MonsterHttp.startServer();
-        UtilityManager.execute();
+        UtilityManager manager = UtilityManager.getInstance();
+        EntrypointUtils.invoke("usefulutilities", UsefulUtilitiesApi.class, (api) -> api.initializeUtilities(manager));
     }
 }
