@@ -10,7 +10,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
-class PianoKeySprite(val pitch: Float, val keyColor: PianoDescription.KeyColor, val text: Text, val keyLabel: Text) extends WWidget {
+class PianoKeySprite(val pitch: Float, val keyColor: PianoDescription.KeyColor.KeyColor, val text: Text, val keyLabel: Text) extends WWidget {
 	private var texture: Identifier = _
 	private var label: Text = _
 
