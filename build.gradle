@@ -1,5 +1,7 @@
 plugins {
-	id 'fabric-loom' version '0.4.15'
+	id 'java'
+	id 'scala'
+	id 'fabric-loom' version '0.5-SNAPSHOT'
 	id 'maven-publish'
 	id 'com.matthewprenger.cursegradle' version "1.4.0"
 }
@@ -11,20 +13,22 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+repositories {
+	maven {
+		name = "CottonMC"
+		url = "http://server.bbkr.space:8081/artifactory/libs-release"
+	}
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2"
-
 	include "io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2"
-}
-
-repositories {
-	maven {
-		name = "CottonMC"
-		url = "http://server.bbkr.space:8081/artifactory/libs-release"
+	modApi("net.fabricmc:fabric-language-scala:0.3.2.+") {
+		exclude group: 'net.fabricmc'
 	}
 }
 
@@ -40,6 +44,18 @@ processResources {
 		exclude "fabric.mod.json"
 	}
 }
+
+sourceSets {
+	main {
+		java {
+			srcDirs = []
+		}
+		scala {
+			srcDirs = ['src/main/scala', 'src/main/java']
+		}
+	}
+}
+
 tasks.withType(JavaCompile) {
 	options.encoding = "UTF-8"
 }
@@ -82,6 +98,8 @@ curseforge {
 		changelog = 'A changelog can be found at https://github.com/BoogieMonster1O1/useful-utilities/commits'
 		releaseType = 'release'
 		addGameVersion '1.16.2'
+		addGameVersion '1.16.3'
+		addGameVersion '1.16.4'
 		addGameVersion 'Fabric'
 		mainArtifact(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar")) {
 			displayName = "[${project.minecraft_version}] Useful Utilities ${version}"

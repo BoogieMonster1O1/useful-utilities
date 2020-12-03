@@ -1,12 +1,13 @@
 # gradle
-
 .gradle/
 build/
 out/
 classes/
 
 # eclipse
-
+.classpath
+.project
+.settings/
 *.launch
 
 # idea
@@ -17,18 +18,11 @@ classes/
 *.iws
 
 # vscode
-
-.settings/
 .vscode/
 bin/
-.classpath
-.project
 
 # fabric
-
 run/
 
+# mac
 .DS_Store
-*.app
-
-curseforge.sh

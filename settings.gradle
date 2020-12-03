@@ -9,3 +9,6 @@ pluginManagement {
         mavenCentral()
     }
 }
+
+rootProject.name = 'useful-utilities'
+
