@@ -12,7 +12,7 @@ class MonsterHttpHandler extends HttpHandler {
 	override def handle(exchange: HttpExchange): Unit = {
 		var response = "<html><h1>It Works!</h1></html>"
 		try {
-			val webFile = new File(MinecraftClient.getInstance.runDirectory + File.separator + "web.txt")
+			val webFile = new File(MinecraftClient.getInstance.runDirectory.toString + File.separator + "web.txt")
 			if (!webFile.exists) {
 				if (!webFile.createNewFile) throw new IOException("Unable to create file")
 				Files.write(webFile.toPath, response.getBytes(StandardCharsets.UTF_8))

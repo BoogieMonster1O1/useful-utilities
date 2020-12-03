@@ -30,6 +30,7 @@ dependencies {
 	modApi("net.fabricmc:fabric-language-scala:0.3.2.+") {
 		exclude group: 'net.fabricmc'
 	}
+	compileOnly "com.google.code.findbugs:jsr305:+"
 }
 
 processResources {

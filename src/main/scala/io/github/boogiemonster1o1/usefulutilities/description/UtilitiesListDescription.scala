@@ -18,7 +18,6 @@ import net.minecraft.util.Identifier
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 
-
 @Environment(EnvType.CLIENT) class UtilitiesListDescription() extends LightweightGuiDescription {
 	private var x = 14
 	private var y = 9

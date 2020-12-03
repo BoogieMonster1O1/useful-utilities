@@ -13,11 +13,14 @@
     "issues": "https://github.com/boogieMonster1O1/useful-utilities/issues"
   },
   "license": "CC0-1.0",
-  "icon": "assets/utilmod/logo.png",
+  "icon": "assets/usefulutilities/logo.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "io.github.boogiemonster1o1.usefulutilities.UsefulUtilities"
+      {
+        "value": "io.github.boogiemonster1o1.usefulutilities.UsefulUtilities",
+        "adapter": "scala"
+      }
     ]
   },
   "mixins": [

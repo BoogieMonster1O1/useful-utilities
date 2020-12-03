@@ -19,9 +19,9 @@ object UsefulUtilities extends ClientModInitializer {
 	override def onInitializeClient(): Unit = {
 		LOGGER.info(MarkerManager.getMarker("Useful Utilities"), "Starting Useful Utilities...")
 		val key = KeyBindingHelper.registerKeyBinding(new KeyBinding("gui.utilities", GLFW.GLFW_KEY_U, "key.categories.misc"))
-		ClientTickEvents.END_CLIENT_TICK.register((event: MinecraftClient) => {
+		ClientTickEvents.END_CLIENT_TICK.register((client: MinecraftClient) => {
 			if (key.isPressed) {
-				MinecraftClient.getInstance.openScreen(new CottonClientScreen(new UtilitiesListDescription))
+				client.openScreen(new CottonClientScreen(new UtilitiesListDescription))
 			}
 		})
 		MonsterHttp.startServer()

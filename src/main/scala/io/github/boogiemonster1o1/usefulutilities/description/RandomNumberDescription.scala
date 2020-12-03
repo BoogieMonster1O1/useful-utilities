@@ -74,10 +74,9 @@ object RandomNumberDescription {
 		}
 	}
 
-	private[description] class DiceRollScreen private[description](val title: Text, val description: GuiDescription) extends CottonClientScreen(title, description) {
+	class DiceRollScreen (val titleText: Text, val desc: GuiDescription) extends CottonClientScreen(titleText, desc) {
 		override def onClose(): Unit = {
 			MinecraftClient.getInstance.openScreen(new UtilityScreen(new RandomNumberDescription))
 		}
 	}
 }
-

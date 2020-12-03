@@ -27,11 +27,7 @@ class HttpServerDescription @throws[RuntimeException]() extends LightweightGuiDe
 		val open = new WButton(new TranslatableText("gui.utilities.monsterhttp.open"))
 		root.add(open, 1, 5, 12, 1)
 		open.setOnClick(() => {
-			def foo() = {
-				Util.getOperatingSystem.open(new File(MinecraftClient.getInstance.runDirectory + File.separator + "web.txt"))
-			}
-
-			foo()
+			Util.getOperatingSystem.open(MinecraftClient.getInstance.runDirectory.toPath.resolve("web.txt").toUri)
 		})
 		root.validate(this)
 	}

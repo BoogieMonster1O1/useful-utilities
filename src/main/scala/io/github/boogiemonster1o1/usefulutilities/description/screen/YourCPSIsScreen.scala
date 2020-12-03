@@ -5,7 +5,7 @@ import io.github.cottonmc.cotton.gui.GuiDescription
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen
 import net.minecraft.client.MinecraftClient
 
-class YourCPSIsScreen(val description: GuiDescription) extends CottonClientScreen(description) {
+class YourCPSIsScreen(val desc: GuiDescription) extends CottonClientScreen(desc) {
 	override def onClose(): Unit = {
 		MinecraftClient.getInstance.openScreen(new CottonClientScreen(new UtilitiesListDescription))
 	}
