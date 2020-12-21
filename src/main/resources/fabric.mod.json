@@ -12,7 +12,7 @@
     "sources": "https://github.com/BoogieMonster1O1/useful-utilities",
     "issues": "https://github.com/boogieMonster1O1/useful-utilities/issues"
   },
-  "license": "CC0-1.0",
+  "license": "Apache-2.0",
   "icon": "assets/usefulutilities/logo.png",
   "environment": "client",
   "entrypoints": {
