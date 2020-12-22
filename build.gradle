@@ -27,7 +27,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2"
 	include "io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2"
-	modApi("net.fabricmc:fabric-language-scala:0.3.2.+") {
+	modImplementation("net.fabricmc:fabric-language-scala:0.3.2.+") {
 		exclude group: 'net.fabricmc'
 	}
 	compileOnly "com.google.code.findbugs:jsr305:+"
