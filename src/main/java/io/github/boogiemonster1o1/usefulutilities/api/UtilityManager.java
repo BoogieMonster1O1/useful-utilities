@@ -26,7 +26,7 @@ public class UtilityManager {
 
     public void addUtility(UtilityScreen screen, Text label) {
         WButton button = new WButton();
-        button.setOnClick(() -> MinecraftClient.getInstance().openScreen(screen));
+        button.setOnClick(() -> MinecraftClient.getInstance().setScreen(screen));
         button.setLabel(label);
         this.buttons.add(button);
         this.utilitiesCount++;

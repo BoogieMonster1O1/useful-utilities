@@ -3,7 +3,7 @@ package io.github.boogiemonster1o1.usefulutilities.widget
 import io.github.boogiemonster1o1.usefulutilities.description.PianoDescription
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WWidget
-import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
+import io.github.cottonmc.cotton.gui.widget.data.{HorizontalAlignment, InputResult}
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.sound.SoundEvents
@@ -25,9 +25,10 @@ class PianoKeySprite(val pitch: Float, val keyColor: PianoDescription.KeyColor.K
 		this.label = text
 	}
 
-	override def onClick(x: Int, y: Int, button: Int): Unit = {
-		if (MinecraftClient.getInstance.player == null) return
+	override def onClick(x: Int, y: Int, button: Int): InputResult = {
+		if (MinecraftClient.getInstance.player == null) return InputResult.IGNORED
 		MinecraftClient.getInstance.player.playSound(SoundEvents.BLOCK_NOTE_BLOCK_PLING, 2.0f, this.pitch)
+		InputResult.PROCESSED
 	}
 
 	override def paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int): Unit = {

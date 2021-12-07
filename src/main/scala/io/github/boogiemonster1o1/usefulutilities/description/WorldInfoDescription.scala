@@ -40,7 +40,7 @@ class WorldInfoDescription() extends LightweightGuiDescription {
 		y = Math.floor(y * 10000) / 10000.0
 		var z: Double = player.getZ
 		z = Math.floor(z * 10000) / 10000.0
-		val biome: String = world.getRegistryManager.get(Registry.BIOME_KEY).getId(world.getBiome(player.getBlockPos))
+		val biome: String = world.getRegistryManager.get(Registry.BIOME_KEY).getId(world.getBiome(player.getBlockPos)).toString
 		val pchunk: String = chunk.getPos.toString
 		val diff: String = difficulty.toString
 		val wtime: String = time.toString
