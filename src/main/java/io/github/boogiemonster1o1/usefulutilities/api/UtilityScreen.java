@@ -23,7 +23,7 @@ public class UtilityScreen extends CottonClientScreen {
     @Override
     public final void onClose() {
         this.beforeClose();
-        MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
+        MinecraftClient.getInstance().setScreen(new CottonClientScreen(new UtilitiesListDescription()));
     }
 
     public void beforeClose() {

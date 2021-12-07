@@ -32,7 +32,7 @@ class PianoKeySprite(val pitch: Float, val keyColor: PianoDescription.KeyColor.K
 
 	override def paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int): Unit = {
 		super.paint(matrices, x, y, mouseX, mouseY)
-		ScreenDrawing.texturedRect(x, y, this.width, this.height, this.texture, 0xFFFFFFFF)
+		ScreenDrawing.texturedRect(matrices, x, y, this.width, this.height, this.texture, 0xFFFFFFFF)
 		if (this.keyColor eq PianoDescription.KeyColor.WHITE) {
 			ScreenDrawing.drawString(matrices, this.label.asString, HorizontalAlignment.CENTER, x, y + 55, this.width, 0x000000)
 			ScreenDrawing.drawString(matrices, this.keyLabel.asString, HorizontalAlignment.CENTER, x, y + 70, this.width, 0xFF0000)

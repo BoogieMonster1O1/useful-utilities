@@ -17,7 +17,7 @@ import net.minecraft.client.gui.screen.Screen
 @Environment(EnvType.CLIENT) object PianoDescription {
 	class KeyboardMainScreen() extends CottonClientScreen(new TranslatableText("gui.utilities.keyboard"), new PianoDescription) {
 		override def onClose(): Unit = {
-			MinecraftClient.getInstance.openScreen(new CottonClientScreen(new UtilitiesListDescription))
+			MinecraftClient.getInstance.setScreen(new CottonClientScreen(new UtilitiesListDescription))
 		}
 
 		override def keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean = {

@@ -23,8 +23,8 @@ public class MixinGameMenuScreen extends Screen {
 
     @Inject(method = "initWidgets", at = @At("RETURN"))
     public void addWidget(CallbackInfo ci) {
-        this.addButton(new ButtonWidget(this.width / 2 - 102, this.height / 4 + 144 + -16, 98, 20, new TranslatableText("gui.utilities"), (buttonWidgetx) -> {
-            MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 102, this.height / 4 + 144 + -16, 98, 20, new TranslatableText("gui.utilities"), (buttonWidgetx) -> {
+            MinecraftClient.getInstance().setScreen(new CottonClientScreen(new UtilitiesListDescription()));
         }));
     }
 }

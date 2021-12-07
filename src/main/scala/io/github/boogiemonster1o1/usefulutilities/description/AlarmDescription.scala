@@ -57,11 +57,13 @@ class AlarmDescription() extends LightweightGuiDescription {
 				var timeS = time.getText.toDouble.round
 				timeS = timeS * 1000
 				val finalTime = timeS
-				MinecraftClient.getInstance.openScreen(new CottonClientScreen(new UtilitiesListDescription))
+				MinecraftClient.getInstance.setScreen(new CottonClientScreen(new UtilitiesListDescription))
 				timer.schedule(new TimerTask() {
 					override def run(): Unit = {
-						MinecraftClient.getInstance.openScreen(new CottonClientScreen(new TranslatableText("gui.utilities.alarm"), new AlarmDescription.TimeUpDescription(finalTime)))
-						timer.cancel()
+						MinecraftClient.getInstance().execute(() => {
+							MinecraftClient.getInstance.setScreen(new CottonClientScreen(new TranslatableText("gui.utilities.alarm"), new AlarmDescription.TimeUpDescription(finalTime)))
+							timer.cancel()
+						})
 					}
 				}, timeS)
 			} catch {

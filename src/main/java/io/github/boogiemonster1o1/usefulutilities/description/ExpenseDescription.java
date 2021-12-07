@@ -1,5 +1,16 @@
 package io.github.boogiemonster1o1.usefulutilities.description;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.function.BiConsumer;
+
 import io.github.boogiemonster1o1.usefulutilities.api.UtilityScreen;
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
@@ -13,18 +24,6 @@ import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import io.github.cottonmc.cotton.gui.widget.WTextField;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.function.BiConsumer;
-
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
@@ -32,12 +31,13 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Util;
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class ExpenseDescription extends LightweightGuiDescription {
     private static final String runDirString = MinecraftClient.getInstance().runDirectory.toString();
     private static final String initValString = runDirString + File.separator + "init.txt";
     private static final String expensesPath = runDirString + File.separator + "expenses.txt";
-    private static File expenses = new File(expensesPath);
-    private static File current = new File(initValString);
+    private static final File expenses = new File(expensesPath);
+    private static final File current = new File(initValString);
 
     @Override
     public void addPainters() {
@@ -49,7 +49,7 @@ public class ExpenseDescription extends LightweightGuiDescription {
     public ExpenseDescription() throws IOException {
 
         if (current.exists())
-            MinecraftClient.getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense"), new ExpenseDescription(true)));
+            MinecraftClient.getInstance().setScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense"), new ExpenseDescription(true)));
         else {
             FileWriter fw = new FileWriter(current);
             current.createNewFile();
@@ -64,7 +64,7 @@ public class ExpenseDescription extends LightweightGuiDescription {
                     double val = Double.parseDouble(initVal.getText());
                     fw.write(Double.toString(val));
                     fw.close();
-                    MinecraftClient.getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense"), new ExpenseDescription(true)));
+                    MinecraftClient.getInstance().setScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense"), new ExpenseDescription(true)));
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -99,9 +99,7 @@ public class ExpenseDescription extends LightweightGuiDescription {
             fw.close();
         }
         List<String> expenseData = Files.readAllLines(Paths.get(expensesPath));
-        BiConsumer<String, ExpensePanel> expenseBiConsumer = (strinj, destination) -> {
-            destination.expenseLabel.setText(new LiteralText(strinj));
-        };
+        BiConsumer<String, ExpensePanel> expenseBiConsumer = (strinj, destination) -> destination.expenseLabel.setText(new LiteralText(strinj));
 
         WListPanel<String, ExpensePanel> expenseListWListPanel = new WListPanel<>(expenseData, ExpensePanel::new, expenseBiConsumer);
         expenseListWListPanel.setListItemHeight(25);
@@ -114,11 +112,11 @@ public class ExpenseDescription extends LightweightGuiDescription {
 
         WButton depositButton = new WButton(new TranslatableText("gui.utilities.expense.deposit"));
         root.add(depositButton, 205, 65, 170, 10);
-        depositButton.setOnClick(() -> MinecraftClient.getInstance().openScreen(new ExpenseTypeScreen(new TranslatableText("gui.utilities.expense.deposit"), new ExpenseDescription(Type.DEPOSIT))));
+        depositButton.setOnClick(() -> MinecraftClient.getInstance().setScreen(new ExpenseTypeScreen(new TranslatableText("gui.utilities.expense.deposit"), new ExpenseDescription(Type.DEPOSIT))));
 
         WButton withdrawButton = new WButton(new TranslatableText("gui.utilities.expense.withdraw"));
         root.add(withdrawButton, 205, 105, 170, 10);
-        withdrawButton.setOnClick(() -> MinecraftClient.getInstance().openScreen(new ExpenseTypeScreen(new TranslatableText("gui.utilities.expense.withdraw"), new ExpenseDescription(Type.WITHDRAW))));
+        withdrawButton.setOnClick(() -> MinecraftClient.getInstance().setScreen(new ExpenseTypeScreen(new TranslatableText("gui.utilities.expense.withdraw"), new ExpenseDescription(Type.WITHDRAW))));
 
         WButton openLog = new WButton(new TranslatableText("gui.utilities.expense.open"));
         root.add(openLog, 205, 145, 170, 10);
@@ -132,7 +130,7 @@ public class ExpenseDescription extends LightweightGuiDescription {
 
         WButton resetLog = new WButton(new TranslatableText("gui.utilities.expense.reset"));
         root.add(resetLog, 205, 185, 170, 10);
-        resetLog.setOnClick(() -> MinecraftClient.getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense.deleteconfirm"), new ExpenseDescription("RESET"))));
+        resetLog.setOnClick(() -> MinecraftClient.getInstance().setScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense.deleteconfirm"), new ExpenseDescription("RESET"))));
 
         root.validate(this);
     }
@@ -156,8 +154,8 @@ public class ExpenseDescription extends LightweightGuiDescription {
             if (del.equals(textDel)) {
                 expenses.delete();
                 current.delete();
-                MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
-            } else MinecraftClient.getInstance().openScreen(new CottonClientScreen(new UtilitiesListDescription()));
+            }
+            MinecraftClient.getInstance().setScreen(new CottonClientScreen(new UtilitiesListDescription()));
         });
 
         root.validate(this);
@@ -172,7 +170,7 @@ public class ExpenseDescription extends LightweightGuiDescription {
         @Override
         public void onClose() {
             try {
-                MinecraftClient.getInstance().openScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense"), new ExpenseDescription(true)));
+                MinecraftClient.getInstance().setScreen(new UtilityScreen(new TranslatableText("gui.utilities.expense"), new ExpenseDescription(true)));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -192,7 +190,7 @@ public class ExpenseDescription extends LightweightGuiDescription {
             btnDone.setLabel(new TranslatableText("gui.utilities.expense.makedeposit"));
             btnDone.setOnClick(() -> {
                 try {
-                    Double val = Double.parseDouble(valField.getText());
+                    double val = Double.parseDouble(valField.getText());
                     FileWriter fw = new FileWriter(expenses, true);
                     BufferedWriter bw = new BufferedWriter(fw);
                     String fwString = "+" + val + " " + reasonField.getText();
@@ -208,7 +206,7 @@ public class ExpenseDescription extends LightweightGuiDescription {
                     FileWriter fw0 = new FileWriter(current);
                     fw0.write(Double.toString(currentVal));
                     fw0.close();
-                    MinecraftClient.getInstance().openScreen(new UtilityScreen(new ExpenseDescription(true)));
+                    MinecraftClient.getInstance().setScreen(new UtilityScreen(new ExpenseDescription(true)));
                 } catch (Exception exp) {
                     exp.printStackTrace();
                 }
@@ -217,8 +215,7 @@ public class ExpenseDescription extends LightweightGuiDescription {
             btnDone.setLabel(new TranslatableText("gui.utilities.expense.makewithdrawal"));
             btnDone.setOnClick(() -> {
                 try {
-                    Double val = Double.parseDouble(valField.getText());
-                    BigDecimal a = new BigDecimal(val);
+                    double val = Double.parseDouble(valField.getText());
                     FileWriter fw = new FileWriter(expenses, true);
                     BufferedWriter bw = new BufferedWriter(fw);
                     String fwString = "-" + val + " " + reasonField.getText();
@@ -234,7 +231,7 @@ public class ExpenseDescription extends LightweightGuiDescription {
                     FileWriter fw0 = new FileWriter(current);
                     fw0.write(Double.toString(currentVal));
                     fw0.close();
-                    MinecraftClient.getInstance().openScreen(new UtilityScreen(new ExpenseDescription(true)));
+                    MinecraftClient.getInstance().setScreen(new UtilityScreen(new ExpenseDescription(true)));
                 } catch (Exception exp) {
                     exp.printStackTrace();
                 }

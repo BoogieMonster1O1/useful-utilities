@@ -10,7 +10,6 @@ import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
 import net.minecraft.text.LiteralText
 import net.minecraft.text.TranslatableText
 
-//noinspection DuplicatedCode
 class PortalCoordinatesDescription() extends LightweightGuiDescription {
 	{
 		val outputTitle = new WLabel(new TranslatableText("gui.utilities.portal.output"))

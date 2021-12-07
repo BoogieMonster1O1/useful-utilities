@@ -38,12 +38,9 @@ class RandomNumberDescription() extends LightweightGuiDescription {
 			try {
 				val from = Math.abs(Math.floor(range1.getText.toDouble).round)
 				val to = Math.abs(Math.floor(range2.getText.toDouble).round) + 1
-				//noinspection DuplicatedCode
-				if (from == to) MinecraftClient.getInstance.openScreen(new RandomNumberDescription.DiceRollScreen(new TranslatableText("gui.utilities.random.rolled0"), new RandomNumberDescription.DiceRollScreen.DiceHasRolledScreen(from)))
-				else if (from > to) throw new Exception
-				else {
+				if (from < to) {
 					val dice = ThreadLocalRandom.current.nextLong(from, to)
-					MinecraftClient.getInstance.openScreen(new RandomNumberDescription.DiceRollScreen(new TranslatableText("gui.utilities.random.rolled0"), new RandomNumberDescription.DiceRollScreen.DiceHasRolledScreen(dice)))
+					MinecraftClient.getInstance.setScreen(new RandomNumberDescription.DiceRollScreen(new TranslatableText("gui.utilities.random.rolled0"), new RandomNumberDescription.DiceRollScreen.DiceHasRolledScreen(dice)))
 				}
 			} catch {
 				case exception: Exception =>
@@ -76,7 +73,7 @@ object RandomNumberDescription {
 
 	class DiceRollScreen (val titleText: Text, val desc: GuiDescription) extends CottonClientScreen(titleText, desc) {
 		override def onClose(): Unit = {
-			MinecraftClient.getInstance.openScreen(new UtilityScreen(new RandomNumberDescription))
+			MinecraftClient.getInstance.setScreen(new UtilityScreen(new RandomNumberDescription))
 		}
 	}
 }

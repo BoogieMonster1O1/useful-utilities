@@ -46,14 +46,16 @@ class ClicksPerSecondDescription() extends LightweightGuiDescription {
 				root.remove(seconds)
 				timer.schedule(new TimerTask() {
 					override def run(): Unit = {
-						cps = clicks / time
-						MinecraftClient.getInstance.openScreen(new YourCPSIsScreen(new CpsOutputScreen(cps)))
-						timer.cancel()
-						timer = null
-						root.add(seconds, 1, 5, 7, 1)
-						begin = false
-						time = 0
-						clicks = 0
+						MinecraftClient.getInstance().execute(() => {
+							cps = clicks / time
+							MinecraftClient.getInstance.setScreen(new YourCPSIsScreen(new CpsOutputScreen(cps)))
+							timer.cancel()
+							timer = null
+							root.add(seconds, 1, 5, 7, 1)
+							begin = false
+							time = 0
+							clicks = 0
+						})
 					}
 				}, time * 1000)
 			}

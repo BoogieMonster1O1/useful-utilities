@@ -19,9 +19,9 @@ class HttpServerDescription @throws[RuntimeException]() extends LightweightGuiDe
 		val visit = new WButton(new TranslatableText("gui.utilities.monsterhttp.visit"))
 		root.add(visit, 1, 3, 12, 1)
 		visit.setOnClick(() => {
-			MinecraftClient.getInstance.openScreen(new ConfirmChatLinkScreen((bl: Boolean) => {
+			MinecraftClient.getInstance.setScreen(new ConfirmChatLinkScreen((bl: Boolean) => {
 				if (bl) Util.getOperatingSystem.open("http://localhost:80")
-				MinecraftClient.getInstance.openScreen(new CottonClientScreen(new TranslatableText("gui.utilities.monsterhttp"), this))
+				MinecraftClient.getInstance.setScreen(new CottonClientScreen(new TranslatableText("gui.utilities.monsterhttp"), this))
 			}, "http://localhost:80", true))
 		})
 		val open = new WButton(new TranslatableText("gui.utilities.monsterhttp.open"))

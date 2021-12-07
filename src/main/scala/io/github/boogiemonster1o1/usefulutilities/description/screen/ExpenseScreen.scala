@@ -9,6 +9,6 @@ import net.minecraft.text.TranslatableText
 
 class ExpenseScreen @throws[IOException] extends CottonClientScreen(new TranslatableText("gui.utilities.expense"), new ExpenseDescription) {
 	override def onClose(): Unit = {
-		MinecraftClient.getInstance.openScreen(new CottonClientScreen(new UtilitiesListDescription))
+		MinecraftClient.getInstance.setScreen(new CottonClientScreen(new UtilitiesListDescription))
 	}
 }

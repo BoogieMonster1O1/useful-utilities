@@ -7,9 +7,9 @@ import io.github.cottonmc.cotton.gui.client.CottonClientScreen
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
-import net.fabricmc.loader.entrypoint.minecraft.hooks.EntrypointUtils
+import net.fabricmc.loader.impl.entrypoint.EntrypointUtils
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.options.KeyBinding
+import net.minecraft.client.option.KeyBinding
 import org.apache.logging.log4j.{LogManager, Logger, MarkerManager}
 import org.lwjgl.glfw.GLFW
 
@@ -20,8 +20,8 @@ object UsefulUtilities extends ClientModInitializer {
 		LOGGER.info(MarkerManager.getMarker("Useful Utilities"), "Starting Useful Utilities...")
 		val key = KeyBindingHelper.registerKeyBinding(new KeyBinding("gui.utilities", GLFW.GLFW_KEY_U, "key.categories.misc"))
 		ClientTickEvents.END_CLIENT_TICK.register((client: MinecraftClient) => {
-			if (key.isPressed) {
-				client.openScreen(new CottonClientScreen(new UtilitiesListDescription))
+			if (key.wasPressed()) {
+				client.setScreen(new CottonClientScreen(new UtilitiesListDescription))
 			}
 		})
 		MonsterHttp.startServer()
