@@ -1,8 +1,7 @@
 plugins {
 	id 'java'
 	id 'scala'
-	id 'fabric-loom' version '0.4-SNAPSHOT'
-	id 'maven-publish'
+	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'com.matthewprenger.cursegradle' version "1.4.0"
 }
 
@@ -16,7 +15,7 @@ group = project.maven_group
 repositories {
 	maven {
 		name = "CottonMC"
-		url = "http://server.bbkr.space:8081/artifactory/libs-release"
+		url = "https://server.bbkr.space/artifactory/libs-release"
 	}
 }
 
@@ -25,26 +24,21 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2"
-	include "io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2"
-	modImplementation("net.fabricmc:fabric-language-scala:0.3.2.+") {
+	modImplementation "io.github.cottonmc:LibGui:5.1.0+1.18"
+	include "io.github.cottonmc:LibGui:5.1.0+1.18"
+	modImplementation("net.fabricmc:fabric-language-scala:1.1.0+scala.2.13.6") {
 		exclude group: 'net.fabricmc'
 	}
-	compileOnly "com.google.code.findbugs:jsr305:+"
 }
 
 processResources {
 	inputs.property "version", project.version
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
+	filesMatching("fabric.mod.json") {
 		expand "version": project.version
 	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
-	}
 }
+
 
 sourceSets {
 	main {
@@ -58,36 +52,19 @@ sourceSets {
 }
 
 tasks.withType(JavaCompile) {
+	// ensure that the encoding is set to UTF-8, no matter what the system default is
+	// this fixes some edge cases with special characters not displaying correctly
+	// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
 	options.encoding = "UTF-8"
+	options.release.set 17
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = "sources"
-	from sourceSets.main.allSource
+java {
+	withSourcesJar()
 }
 
 jar {
 	from "LICENSE"
-}
-
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-		}
-	}
-
-	// select the repositories you want to publish to
-	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
-	}
 }
 
 curseforge {
@@ -98,9 +75,7 @@ curseforge {
 		id = '382093'
 		changelog = 'A changelog can be found at https://github.com/BoogieMonster1O1/useful-utilities/commits'
 		releaseType = 'release'
-		addGameVersion '1.16.2'
-		addGameVersion '1.16.3'
-		addGameVersion '1.16.4'
+		addGameVersion '1.18'
 		addGameVersion 'Fabric'
 		mainArtifact(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar")) {
 			displayName = "[${project.minecraft_version}] Useful Utilities ${version}"
