@@ -1,21 +1,14 @@
 package io.github.boogiemonster1o1.usefulutilities.description
 
-import io.github.boogiemonster1o1.usefulutilities.description.screen.CpsOutputScreen
-import io.github.boogiemonster1o1.usefulutilities.description.screen.YourCPSIsScreen
-import io.github.cottonmc.cotton.gui.client.BackgroundPainter
-import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
-import io.github.cottonmc.cotton.gui.widget.WButton
-import io.github.cottonmc.cotton.gui.widget.WGridPanel
-import io.github.cottonmc.cotton.gui.widget.WLabel
-import io.github.cottonmc.cotton.gui.widget.WLabeledSlider
-import io.github.cottonmc.cotton.gui.widget.data.Axis
-import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
-import java.util.Timer
-import java.util.TimerTask
+import io.github.boogiemonster1o1.usefulutilities.description.screen.{CpsOutputScreen, YourCPSIsScreen}
+import io.github.cottonmc.cotton.gui.client.{BackgroundPainter, LightweightGuiDescription}
+import io.github.cottonmc.cotton.gui.widget.{WButton, WGridPanel, WLabel, WLabeledSlider}
+import io.github.cottonmc.cotton.gui.widget.data.{Axis, HorizontalAlignment}
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.resource.language.I18n
-import net.minecraft.text.LiteralText
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.{LiteralText, TranslatableText}
+
+import java.util.{Timer, TimerTask}
 
 class ClicksPerSecondDescription() extends LightweightGuiDescription {
 	private var begin = false

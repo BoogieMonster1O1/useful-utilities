@@ -1,20 +1,14 @@
 package io.github.boogiemonster1o1.usefulutilities.description
 
-import io.github.cottonmc.cotton.gui.client.BackgroundPainter
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen
-import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
-import io.github.cottonmc.cotton.gui.widget.WButton
-import io.github.cottonmc.cotton.gui.widget.WGridPanel
-import io.github.cottonmc.cotton.gui.widget.WLabel
-import io.github.cottonmc.cotton.gui.widget.WSprite
-import io.github.cottonmc.cotton.gui.widget.WTextField
+import io.github.cottonmc.cotton.gui.client.{BackgroundPainter, CottonClientScreen, LightweightGuiDescription}
+import io.github.cottonmc.cotton.gui.widget._
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
-import java.util.Timer
-import java.util.TimerTask
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.resource.language.I18n
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Identifier
+
+import java.util.{Timer, TimerTask}
 
 object AlarmDescription {
 	class TimeUpDescription private[description](var seconds: Long) extends LightweightGuiDescription {

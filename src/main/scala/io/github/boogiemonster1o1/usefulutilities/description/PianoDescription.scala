@@ -1,18 +1,14 @@
 package io.github.boogiemonster1o1.usefulutilities.description
 
 import io.github.boogiemonster1o1.usefulutilities.widget.PianoKeySprite
-import io.github.cottonmc.cotton.gui.client.BackgroundPainter
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen
-import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
+import io.github.cottonmc.cotton.gui.client.{BackgroundPainter, CottonClientScreen, LightweightGuiDescription}
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
-import org.lwjgl.glfw.GLFW
+import net.fabricmc.api.{EnvType, Environment}
 import net.minecraft.client.MinecraftClient
-import net.minecraft.sound.SoundEvents
-import net.minecraft.text.LiteralText
-import net.minecraft.text.TranslatableText
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
 import net.minecraft.client.gui.screen.Screen
+import net.minecraft.sound.SoundEvents
+import net.minecraft.text.{LiteralText, TranslatableText}
+import org.lwjgl.glfw.GLFW
 
 @Environment(EnvType.CLIENT) object PianoDescription {
 	class KeyboardMainScreen() extends CottonClientScreen(new TranslatableText("gui.utilities.keyboard"), new PianoDescription) {

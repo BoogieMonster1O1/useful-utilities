@@ -1,8 +1,9 @@
 package io.github.boogiemonster1o1.usefulutilities.http
 
-import io.github.boogiemonster1o1.usefulutilities.UsefulUtilities
-import java.net.InetSocketAddress
 import com.sun.net.httpserver.HttpServer
+import io.github.boogiemonster1o1.usefulutilities.UsefulUtilities
+
+import java.net.InetSocketAddress
 
 object MonsterHttp {
 	private var server: HttpServer = _

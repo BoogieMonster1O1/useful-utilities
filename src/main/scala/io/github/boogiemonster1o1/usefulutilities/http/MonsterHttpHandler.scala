@@ -1,12 +1,12 @@
 package io.github.boogiemonster1o1.usefulutilities.http
 
+import com.sun.net.httpserver.{HttpExchange, HttpHandler}
+import net.minecraft.client.MinecraftClient
+
 import java.io.{File, IOException}
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.util
-
-import com.sun.net.httpserver.{HttpExchange, HttpHandler}
-import net.minecraft.client.MinecraftClient
 
 class MonsterHttpHandler extends HttpHandler {
 	override def handle(exchange: HttpExchange): Unit = {

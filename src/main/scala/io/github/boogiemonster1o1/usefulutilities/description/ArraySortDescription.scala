@@ -1,10 +1,10 @@
 package io.github.boogiemonster1o1.usefulutilities.description
 
-import java.util
-
 import io.github.cottonmc.cotton.gui.client.{BackgroundPainter, LightweightGuiDescription}
 import io.github.cottonmc.cotton.gui.widget.{WButton, WGridPanel, WTextField}
 import net.minecraft.text.TranslatableText
+
+import java.util
 
 class ArraySortDescription() extends LightweightGuiDescription {
 	protected var arrayInput = new WTextField(new TranslatableText("gui.utilities.sort.inputsuggest"))

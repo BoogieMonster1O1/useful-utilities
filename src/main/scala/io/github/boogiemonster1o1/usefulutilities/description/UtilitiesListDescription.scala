@@ -1,22 +1,16 @@
 package io.github.boogiemonster1o1.usefulutilities.description
 
-import io.github.boogiemonster1o1.usefulutilities.api.UtilityManager
-import io.github.boogiemonster1o1.usefulutilities.api.UtilityScreen
+import io.github.boogiemonster1o1.usefulutilities.api.{UtilityManager, UtilityScreen}
 import io.github.boogiemonster1o1.usefulutilities.description.screen.ExpenseScreen
-import io.github.cottonmc.cotton.gui.client.BackgroundPainter
-import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
-import io.github.cottonmc.cotton.gui.widget.WButton
-import io.github.cottonmc.cotton.gui.widget.WGridPanel
-import io.github.cottonmc.cotton.gui.widget.WLabel
-import io.github.cottonmc.cotton.gui.widget.WSprite
+import io.github.cottonmc.cotton.gui.client.{BackgroundPainter, LightweightGuiDescription}
+import io.github.cottonmc.cotton.gui.widget.{WButton, WGridPanel, WLabel, WSprite}
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
-import java.io.File
-import java.io.IOException
+import net.fabricmc.api.{EnvType, Environment}
 import net.minecraft.client.MinecraftClient
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Identifier
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
+
+import java.io.{File, IOException}
 
 @Environment(EnvType.CLIENT) class UtilitiesListDescription() extends LightweightGuiDescription {
 	private var x = 14

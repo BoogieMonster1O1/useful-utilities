@@ -2,20 +2,15 @@ package io.github.boogiemonster1o1.usefulutilities.description
 
 import io.github.boogiemonster1o1.usefulutilities.api.UtilityScreen
 import io.github.cottonmc.cotton.gui.GuiDescription
-import io.github.cottonmc.cotton.gui.client.BackgroundPainter
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen
-import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
-import io.github.cottonmc.cotton.gui.widget.WButton
-import io.github.cottonmc.cotton.gui.widget.WGridPanel
-import io.github.cottonmc.cotton.gui.widget.WLabel
-import io.github.cottonmc.cotton.gui.widget.WTextField
+import io.github.cottonmc.cotton.gui.client.{BackgroundPainter, CottonClientScreen, LightweightGuiDescription}
+import io.github.cottonmc.cotton.gui.widget.{WButton, WGridPanel, WLabel, WTextField}
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
-import java.util.Random
-import java.util.concurrent.ThreadLocalRandom
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.resource.language.I18n
-import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.{Text, TranslatableText}
+
+import java.util.Random
+import java.util.concurrent.ThreadLocalRandom
 
 class RandomNumberDescription() extends LightweightGuiDescription {
 	{

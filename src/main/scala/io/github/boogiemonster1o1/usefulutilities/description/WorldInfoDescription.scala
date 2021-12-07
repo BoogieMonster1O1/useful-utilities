@@ -1,17 +1,14 @@
 package io.github.boogiemonster1o1.usefulutilities.description
 
-import io.github.cottonmc.cotton.gui.client.BackgroundPainter
-import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
-import io.github.cottonmc.cotton.gui.widget.WGridPanel
-import io.github.cottonmc.cotton.gui.widget.WLabel
+import io.github.cottonmc.cotton.gui.client.{BackgroundPainter, LightweightGuiDescription}
+import io.github.cottonmc.cotton.gui.widget.{WGridPanel, WLabel}
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.resource.language.I18n
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.registry.Registry
-import net.minecraft.world.Difficulty
-import net.minecraft.world.World
+import net.minecraft.world.{Difficulty, World}
 import net.minecraft.world.biome.Biome
 import net.minecraft.world.chunk.Chunk
 

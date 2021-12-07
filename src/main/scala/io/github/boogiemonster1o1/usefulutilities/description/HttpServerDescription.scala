@@ -1,10 +1,7 @@
 package io.github.boogiemonster1o1.usefulutilities.description
 
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen
-import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
-import io.github.cottonmc.cotton.gui.widget.WButton
-import io.github.cottonmc.cotton.gui.widget.WGridPanel
-import java.io.File
+import io.github.cottonmc.cotton.gui.client.{CottonClientScreen, LightweightGuiDescription}
+import io.github.cottonmc.cotton.gui.widget.{WButton, WGridPanel}
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.ConfirmChatLinkScreen
 import net.minecraft.text.TranslatableText
